@@ -162,7 +162,6 @@ public class PlayMusicActivity extends BaseActivity {
 
     /**
      * 进行下载状态提示的方法
-     *
      * @param str 提示的信息
      */
     private void ShowSingExits(final String str) {
