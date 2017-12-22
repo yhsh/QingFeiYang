@@ -88,10 +88,11 @@ public class PlayMusicActivity extends BaseActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.bt_player:
-                //播放暂停歌曲
                 if (isPlay) {
+                    //暂停歌曲
                     stopPlay(mediaPlayer);
                 } else {
+                    //播放歌曲
                     playSing(sing_play_url, mediaPlayer);
                 }
                 isPlay = !isPlay;
