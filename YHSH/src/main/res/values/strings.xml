@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">扬宏豕慧</string>
+    <string name="welcome_name">欢迎界面图片</string>
+    <string name="home_one_list_iv_des">首页新闻列表图片描述</string>
+    <string name="home_two_move_iv_des">首页电影图片</string>
+    <string name="home_music_new">最新歌曲</string>
+    <string name="home_music_hot">最热歌曲</string>
+</resources>

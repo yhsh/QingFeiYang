@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="data">
+        <item>社会大保险</item>
+        <item>社会大保险</item>
+        <item>社会大保险</item>
+        <item>社会大保险</item>
+        <item>社会大保险</item>
+        <item>社会大保险</item>
+        <item>社会大保险</item>
+        <item>社会大保险</item>
+        <item>社会大保险</item>
+        <item>社会大保险</item>
+        <item>社会大保险</item>
+        <item>社会大保险</item>
+        <item>社会大保险</item>
+        <item>社会大保险</item>
+        <item>社会大保险</item>
+        <item>社会大保险</item>
+    </string-array>
+    <string-array name="data_url" >
+        <item>http://blog.csdn.net/carson_ho/article/details/52693322</item>
+        <item>http://blog.csdn.net/not_process/article/details/42522639</item>
+        <item>http://blog.csdn.net/xiayiye5/article/details/78789251</item>
+        <item>http://blog.csdn.net/it_talk/article/details/52448597</item>
+        <item>http://blog.csdn.net/carson_ho/article/details/52693322</item>
+        <item>http://blog.csdn.net/carson_ho/article/details/52693322</item>
+        <item>http://blog.csdn.net/carson_ho/article/details/52693322</item>
+        <item>http://blog.csdn.net/carson_ho/article/details/52693322</item>
+        <item>http://blog.csdn.net/carson_ho/article/details/52693322</item>
+        <item>http://blog.csdn.net/carson_ho/article/details/52693322</item>
+        <item>http://blog.csdn.net/carson_ho/article/details/52693322</item>
+        <item>http://blog.csdn.net/carson_ho/article/details/52693322</item>
+        <item>http://blog.csdn.net/carson_ho/article/details/52693322</item>
+        <item>http://blog.csdn.net/carson_ho/article/details/52693322</item>
+        <item>http://blog.csdn.net/carson_ho/article/details/52693322</item>
+        <item>http://blog.csdn.net/carson_ho/article/details/52693322</item>
+        <item>http://blog.csdn.net/carson_ho/article/details/52693322</item>
+    </string-array>
+</resources>

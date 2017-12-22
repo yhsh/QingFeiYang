@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageView
+        android:scaleType="fitXY"
+        android:contentDescription="@string/welcome_name"
+        android:src="@mipmap/welcom_robat"
+        android:id="@+id/welcome_img"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <TextView
+        android:clickable="true"
+        android:focusable="true"
+        android:paddingBottom="2dp"
+        android:paddingTop="2dp"
+        android:paddingRight="3dp"
+        android:paddingLeft="3dp"
+        android:id="@+id/welcome_tv_number"
+        android:background="@drawable/countdown_bg"
+        android:layout_margin="20dp"
+        android:layout_alignParentRight="true"
+        android:textColor="@android:color/holo_blue_light"
+        android:text="5S"
+        android:textSize="16sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+</RelativeLayout>

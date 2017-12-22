@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/home_one_list_item_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+            android:text="测试数据两三年的快感纳斯达克你看考试都能开个尼克斯的内库十多年高考考试的"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/home_one_list_item_tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+            android:text="2017年12月20日16:37:37"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_margin="10dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:id="@+id/home_one_list_item_iv"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:contentDescription="@string/home_one_list_iv_des"
+        android:src="@mipmap/bank_bj" />
+</LinearLayout>
