@@ -24,9 +24,9 @@ public class PlayMusicActivity extends BaseActivity {
 
     private boolean isPlay = false;//默认不播放
     private MediaPlayer mediaPlayer;
-    private String sing_play_url;
-    private String sing_name;
-    private String singer_name;
+    private String sing_play_url;//歌曲播放的地址
+    private String sing_name;//歌曲名称
+    private String singer_name;//歌手名字
 
     @Override
     protected View initView() {
@@ -51,10 +51,20 @@ public class PlayMusicActivity extends BaseActivity {
 
     }
 
+    /**
+     * 暂停歌曲的方法
+     *
+     * @param mediaPlayer 播放的类
+     */
     private void stopPlay(MediaPlayer mediaPlayer) {
         mediaPlayer.stop();
     }
 
+    /**
+     * 播放歌曲的方法
+     * @param sing_play_url 歌曲的播放网址
+     * @param mediaPlayer 播放的类
+     */
     public void playSing(String sing_play_url, MediaPlayer mediaPlayer) {
         Uri parse = Uri.parse(sing_play_url);
 
@@ -162,6 +172,7 @@ public class PlayMusicActivity extends BaseActivity {
 
     /**
      * 进行下载状态提示的方法
+     *
      * @param str 提示的信息
      */
     private void ShowSingExits(final String str) {
