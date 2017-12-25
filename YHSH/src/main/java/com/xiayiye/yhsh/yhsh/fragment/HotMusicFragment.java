@@ -90,7 +90,7 @@ public class HotMusicFragment extends BaseHomeFragment {
     @Override
     protected void initData(View view) {
         pd = ProgressDialog.show(getActivity(), "获取数据", "请稍等，获取最新歌曲中…………", false, false);
-        GetNetworkJsonData.TakeNetworkData(YhshAPI.QQMUSIC_HOT_MUSIC, handler, 0, pd, getActivity());
+        GetNetworkJsonData.TakeNetworkData(YhshAPI.QQMUSIC_HOT_MUSIC, handler, 0, pd, getActivity(),"gbk");
         home_hot_music_lv = view.findViewById(R.id.home_hot_music_lv);
     }
 

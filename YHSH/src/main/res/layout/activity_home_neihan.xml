@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/aliceblue">
+    <!--标题栏-->
+    <LinearLayout
+        android:id="@+id/main_ll_tabs"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/lightblue"
+        android:orientation="horizontal">
+        <!--视频-->
+        <TextView
+            android:id="@+id/home_neihan_tuijian"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:text="推荐"
+            android:textColor="@color/green"
+            android:textSize="16sp" />
+        <!--音乐-->
+        <TextView
+            android:id="@+id/home_neihan_video"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:text="视频"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/home_neihan_picture"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:text="图片"
+            android:textSize="16sp" />
+        <!--音乐-->
+        <TextView
+            android:id="@+id/home_neihan_duanzi"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:text="段子"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/home_neihan_dingyue"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:text="订阅"
+            android:textSize="16sp" />
+        <!--音乐-->
+        <TextView
+            android:id="@+id/home_neihan_city"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:text="同城"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/home_neihan_chat"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:text="段友圈"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+    </LinearLayout>
+    <!--指示器-->
+    <!--播放列表-->
+    <FrameLayout
+        android:id="@+id/neihan_fl_replace"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/main_ll_tabs" />
+
+</RelativeLayout>

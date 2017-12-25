@@ -22,7 +22,7 @@ import java.net.URL;
  */
 
 public class GetNetworkJsonData {
-    public static void TakeNetworkData(final String news_url, final Handler handler, final int type, final ProgressDialog progressDialog, final Activity activity) {
+    public static void TakeNetworkData(final String news_url, final Handler handler, final int type, final ProgressDialog progressDialog, final Activity activity, final String code) {
         new Thread() {
             @Override
             public void run() {
@@ -45,13 +45,15 @@ public class GetNetworkJsonData {
                         }
 //                        String result = new String(out.getBytes(), "gbk");
                         byte[] lens = out.toByteArray();
-                        String result = new String(lens, "gbk");//将lens编码设为gbk即可解决乱码问题
+//                        String result = new String(lens, "gbk");//将lens编码设为gbk即可解决乱码问题
+                        String result = new String(lens, code);//将lens编码设为gbk即可解决乱码问题
                         out.close();
                         inputStream.close();
                         Message obtain = Message.obtain();
                         obtain.obj = result;
                         obtain.what = type;
                         handler.sendMessage(obtain);
+                        dismissDialog(progressDialog, activity);//请求成功也关闭对话框
                     } else {
                         dismissDialog(progressDialog, activity);
                     }

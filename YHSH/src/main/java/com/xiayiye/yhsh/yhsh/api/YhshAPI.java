@@ -25,4 +25,8 @@ public interface YhshAPI {
     //http://ws.stream.qqmusic.qq.com/101369814.m4a?fromtag=46
     String QQMUSIC_SING_URL_BASE = "http://ws.stream.qqmusic.qq.com/";//QQ音乐播放链接基类
     String QQMUSIC_SING_ERL_END = ".m4a?fromtag=46";//QQ音乐播放链接后缀
+    String NEIHAN_TUIJIAN = "http://lf.snssdk.com/neihan/stream/mix/v1/?content_type=-101";//内涵段子首页推荐
+    String NEIHAN_VIDEO = "http://lf.snssdk.com/neihan/stream/mix/v1/?content_type=-104";//内涵段子首页视频
+    String NEIHAN_PICTURE = "http://lf.snssdk.com/neihan/stream/mix/v1/?content_type=-103";//内涵段子首页图片
+    String NEIHAN_DUANZI= "http://lf.snssdk.com/neihan/stream/mix/v1/?content_type=-102";//内涵段子首页段子
 }
