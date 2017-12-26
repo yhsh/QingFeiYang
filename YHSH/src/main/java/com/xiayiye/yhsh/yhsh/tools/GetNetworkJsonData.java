@@ -53,22 +53,22 @@ public class GetNetworkJsonData {
                         obtain.obj = result;
                         obtain.what = type;
                         handler.sendMessage(obtain);
-                        dismissDialog(progressDialog, activity);//请求成功也关闭对话框
+                        dismissDialog(progressDialog, activity, "获取数据成功！");//请求成功也关闭对话框
                     } else {
-                        dismissDialog(progressDialog, activity);
+                        dismissDialog(progressDialog, activity, "服务器错误！");
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
-                    dismissDialog(progressDialog, activity);
+                    dismissDialog(progressDialog, activity, "服务器异常！");
                 }
             }
 
-            private void dismissDialog(ProgressDialog progressDialog, final Activity activity) {
+            private void dismissDialog(ProgressDialog progressDialog, final Activity activity, final String msg) {
                 progressDialog.dismiss();//关闭对话框
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(activity, "服务器错误！", Toast.LENGTH_LONG).show();
+                        Toast.makeText(activity, msg, Toast.LENGTH_LONG).show();
                     }
                 });
             }

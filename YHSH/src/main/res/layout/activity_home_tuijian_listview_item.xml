@@ -5,16 +5,30 @@
     android:orientation="vertical">
 
     <TextView
-        android:layout_margin="20dp"
-        android:textColor="@color/cornflowerblue"
-        android:textSize="16sp"
         android:id="@+id/tuijian_listview_item_title"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:textColor="@color/cornflowerblue"
+        android:textSize="16sp" />
 
-    <VideoView
-        android:layout_gravity="center"
-        android:id="@+id/tuijian_listview_item_vv"
-        android:layout_width="wrap_content"
-        android:layout_height="300dp" />
+    <RelativeLayout
+        android:background="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_gravity="center">
+
+        <VideoView
+            android:id="@+id/tuijian_listview_item_vv"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_centerInParent="true" />
+
+        <ImageView
+            android:id="@+id/home_tuijian_list_item_show_img"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:contentDescription="视频预览图" />
+    </RelativeLayout>
 </LinearLayout>
