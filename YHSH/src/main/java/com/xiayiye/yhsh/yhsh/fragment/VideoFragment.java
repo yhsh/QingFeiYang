@@ -82,6 +82,7 @@ public class VideoFragment extends BaseHomeFragment {
     protected void initData(View view) {
         home_video_list = view.findViewById(R.id.home_video_list);
         pd = ProgressDialog.show(getActivity(), "加载数据中", "正在请求数据", false, false);
+        //初始化网络
         initNetwork();
     }
 
