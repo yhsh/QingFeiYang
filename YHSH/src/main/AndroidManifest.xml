@@ -24,7 +24,10 @@
         <activity
             android:name=".NewsDetailActivity"
             android:theme="@android:style/Theme.Light.NoTitleBar" />
-        <activity android:name=".PlayMusicActivity"/>
+        <activity android:name=".PlayMusicActivity" />
+        <activity
+            android:name=".BigPictureActivity"
+            android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen" />
     </application>
 
 </manifest>

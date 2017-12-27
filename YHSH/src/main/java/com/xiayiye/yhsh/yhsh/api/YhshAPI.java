@@ -28,5 +28,7 @@ public interface YhshAPI {
     String NEIHAN_TUIJIAN = "http://lf.snssdk.com/neihan/stream/mix/v1/?content_type=-101";//内涵段子首页推荐
     String NEIHAN_VIDEO = "http://lf.snssdk.com/neihan/stream/mix/v1/?content_type=-104";//内涵段子首页视频
     String NEIHAN_PICTURE = "http://lf.snssdk.com/neihan/stream/mix/v1/?content_type=-103";//内涵段子首页图片
-    String NEIHAN_DUANZI= "http://lf.snssdk.com/neihan/stream/mix/v1/?content_type=-102";//内涵段子首页段子
+    String NEIHAN_DUANZI = "http://lf.snssdk.com/neihan/stream/mix/v1/?content_type=-102";//内涵段子首页段子
+    String GANHUO_PICTURE = "http://gank.io/api/data/%E7%A6%8F%E5%88%A9/";//干货美图地址
+//    String GANHUO_PICTURE_END = "583/1";//干货美图地址
 }
