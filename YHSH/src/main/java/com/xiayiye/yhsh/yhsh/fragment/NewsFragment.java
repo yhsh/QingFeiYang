@@ -116,12 +116,6 @@ public class NewsFragment extends BaseHomeFragment {
         home_one_list = view.findViewById(R.id.home_one_list);
         stringArray = getResources().getStringArray(R.array.data);
         data_url = getResources().getStringArray(R.array.data_url);
-        final int imgs[] = {R.mipmap.bank_bj, R.mipmap.bank_gd,
-                R.mipmap.bank_gf, R.mipmap.bank_gs, R.mipmap.bank_hx,
-                R.mipmap.bank_js, R.mipmap.bank_jt, R.mipmap.bank_ms,
-                R.mipmap.bank_ny, R.mipmap.bank_pa, R.mipmap.bank_pf,
-                R.mipmap.bank_sh, R.mipmap.bank_xy, R.mipmap.bank_yz,
-                R.mipmap.bank_zg, R.mipmap.bank_zs, R.mipmap.bank_zx};
         progressDialog = ProgressDialog.show(getActivity(), "请稍后", "加载数据中…………", false, false);
         initNetWork(YhshAPI.ZHIHU_NEWS, 0);//初始化数据
 //        home_one_list.setAdapter(new MyBaseAdapter());
@@ -207,8 +201,6 @@ public class NewsFragment extends BaseHomeFragment {
             } else {
                 viewHolder = (ViewHolder) convertView.getTag();
             }
-//            home_one_list_item_tv.setText(stringArray[i]);
-//            home_one_list_item_tv.setCompoundDrawablesWithIntrinsicBounds(0, 0, imgs[i], 0);
             GetNetworkImage.initNetWorkImage(viewHolder.home_one_list_item_iv, news_img.get(i), getActivity());//获取网络图片
             viewHolder.home_one_list_item_tv.setText(news_tittle.get(i));
             viewHolder.home_one_list_item_tv_date.setText(news_date);

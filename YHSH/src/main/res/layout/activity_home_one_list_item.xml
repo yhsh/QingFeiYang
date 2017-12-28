@@ -40,5 +40,5 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:contentDescription="@string/home_one_list_iv_des"
-        android:src="@mipmap/bank_bj" />
+        android:src="@mipmap/launcher" />
 </LinearLayout>

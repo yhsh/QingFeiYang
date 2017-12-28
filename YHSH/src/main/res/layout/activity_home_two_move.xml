@@ -17,7 +17,7 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:contentDescription="@string/home_two_move_iv_des"
-            android:src="@mipmap/bank_bj" />
+            android:src="@mipmap/launcher" />
 
         <LinearLayout
             android:layout_width="match_parent"
