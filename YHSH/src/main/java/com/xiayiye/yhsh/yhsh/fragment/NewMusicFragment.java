@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.xiayiye.yhsh.yhsh.PlayMusicActivity;
+import com.xiayiye.yhsh.yhsh.PlayMusicNewActivity;
 import com.xiayiye.yhsh.yhsh.R;
 import com.xiayiye.yhsh.yhsh.api.YhshAPI;
 import com.xiayiye.yhsh.yhsh.tools.GetNetworkImage;
@@ -42,11 +43,12 @@ import java.util.List;
  */
 
 public class NewMusicFragment extends BaseHomeFragment {
-    List<String> sing_name = new ArrayList<>();//歌曲名称
-    List<String> singer_name = new ArrayList<>();//歌手名字
-    List<String> sing_large = new ArrayList<>();//歌曲大小
-    List<String> sing_albumId = new ArrayList<>();//歌曲图片id
-    List<String> singer_id = new ArrayList<>();//歌曲id
+    ArrayList<String> sing_name = new ArrayList<>();//歌曲名称
+    ArrayList<String> sing_url = new ArrayList<>();//歌曲url集合
+    ArrayList<String> singer_name = new ArrayList<>();//歌手名字
+    ArrayList<String> sing_large = new ArrayList<>();//歌曲大小
+    ArrayList<String> sing_albumId = new ArrayList<>();//歌曲图片id
+    ArrayList<String> singer_id = new ArrayList<>();//歌曲id
     Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -95,7 +97,7 @@ public class NewMusicFragment extends BaseHomeFragment {
     @Override
     protected void initData(View view) {
         pd = ProgressDialog.show(getActivity(), "获取数据", "请稍等，获取最新歌曲中…………", false, false);
-        GetNetworkJsonData.TakeNetworkData(YhshAPI.QQMUSIC_NEW_MUSIC, handler, 0, pd, getActivity(),"gbk");
+        GetNetworkJsonData.TakeNetworkData(YhshAPI.QQMUSIC_NEW_MUSIC, handler, 0, pd, getActivity(), "gbk");
         home_new_music_lv = view.findViewById(R.id.home_new_music_lv);
     }
 
@@ -107,10 +109,18 @@ public class NewMusicFragment extends BaseHomeFragment {
                 String sing_id = singer_id.get(i);
                 String sing_play_url = YhshAPI.QQMUSIC_SING_URL_BASE + sing_id + YhshAPI.QQMUSIC_SING_ERL_END;
                 Log.e("最新歌曲播放链接", sing_play_url);
-                Intent intent = new Intent(getActivity(), PlayMusicActivity.class);
-                intent.putExtra("sing_name", sing_name.get(i));
+//                Intent intent = new Intent(getActivity(), PlayMusicActivity.class);
+                Intent intent = new Intent(getActivity(), PlayMusicNewActivity.class);
+                /*intent.putExtra("sing_name", sing_name.get(i));
                 intent.putExtra("singer_name", singer_name.get(i));
-                intent.putExtra("sing_play_url", sing_play_url);
+                intent.putExtra("sing_play_url", sing_play_url);*/
+                intent.putExtra("sing_name", sing_name);
+                intent.putExtra("play_number", i);
+                intent.putExtra("singer_name", singer_name);
+                for (int j = 0; j < singer_id.size(); j++) {
+                    sing_url.add(YhshAPI.QQMUSIC_SING_URL_BASE + singer_id.get(j) + YhshAPI.QQMUSIC_SING_ERL_END);
+                }
+                intent.putExtra("sing_play_url", sing_url);
                 startActivity(intent);
             }
         });
