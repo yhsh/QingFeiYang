@@ -31,4 +31,12 @@ public interface YhshAPI {
     String NEIHAN_DUANZI = "http://lf.snssdk.com/neihan/stream/mix/v1/?content_type=-102";//内涵段子首页段子
     String GANHUO_PICTURE = "http://gank.io/api/data/%E7%A6%8F%E5%88%A9/";//干货美图地址
 //    String GANHUO_PICTURE_END = "583/1";//干货美图地址
+
+
+    String HISTORY_TODAY = "http://api.tianapi.com/txapi/lishi/?key=e666faa73326fd34b46b2ae23964a91b";//历史上的今天(天行数据API)
+    String HEAD_HAIR = "http://api.tianapi.com/txapi/naowan/?key=e666faa73326fd34b46b2ae23964a91b";//脑筋急转弯(天行数据API)
+    String JOKE = "http://api.tianapi.com/txapi/joke/?key=e666faa73326fd34b46b2ae23964a91b";//雷人笑话(天行数据API)
+    String RIDDLE = "http://api.tianapi.com/txapi/cityriddle/?key=e666faa73326fd34b46b2ae23964a91b";//地名谜语(天行数据API)
+    String TONGUE_TWISTER = "http://api.tianapi.com/txapi/rkl/?key=e666faa73326fd34b46b2ae23964a91b";//绕口令(天行数据API)
+    String IT_NEWS = "http://api.tianapi.com/it/?key=e666faa73326fd34b46b2ae23964a91b&num=";//IT新闻(天行数据API)
 }
