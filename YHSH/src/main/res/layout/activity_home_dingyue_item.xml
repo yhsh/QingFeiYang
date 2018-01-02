@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="5dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/dingyue_list_item_request"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="提问"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/dingyue_list_item_result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="回答"
+        android:textSize="20sp" />
+</LinearLayout>

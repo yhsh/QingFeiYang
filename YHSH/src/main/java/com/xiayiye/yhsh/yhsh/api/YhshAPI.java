@@ -34,10 +34,10 @@ public interface YhshAPI {
 
 
     String HISTORY_TODAY = "http://api.tianapi.com/txapi/lishi/?key=e666faa73326fd34b46b2ae23964a91b";//历史上的今天(天行数据API)
-    String HEAD_HAIR = "http://api.tianapi.com/txapi/naowan/?key=e666faa73326fd34b46b2ae23964a91b";//脑筋急转弯(天行数据API)
-    String JOKE = "http://api.tianapi.com/txapi/joke/?key=e666faa73326fd34b46b2ae23964a91b";//雷人笑话(天行数据API)
-    String RIDDLE = "http://api.tianapi.com/txapi/cityriddle/?key=e666faa73326fd34b46b2ae23964a91b";//地名谜语(天行数据API)
-    String TONGUE_TWISTER = "http://api.tianapi.com/txapi/rkl/?key=e666faa73326fd34b46b2ae23964a91b";//绕口令(天行数据API)
+    String HEAD_HAIR = "http://api.tianapi.com/txapi/naowan/?key=e666faa73326fd34b46b2ae23964a91b&num=";//脑筋急转弯(天行数据API)，默认一条数据
+    String JOKE = "http://api.tianapi.com/txapi/joke/?key=e666faa73326fd34b46b2ae23964a91b&num=";//雷人笑话(天行数据API)
+    String RIDDLE = "http://api.tianapi.com/txapi/cityriddle/?key=e666faa73326fd34b46b2ae23964a91b&num=";//地名谜语(天行数据API)
+    String TONGUE_TWISTER = "http://api.tianapi.com/txapi/rkl/?key=e666faa73326fd34b46b2ae23964a91b&num=";//绕口令(天行数据API)
     String IT_NEWS = "http://api.tianapi.com/it/?key=e666faa73326fd34b46b2ae23964a91b&num=";//IT新闻(天行数据API)
     String HOME_IMG_BANDER_ONE = "https://www.2345.com/right/homepage/img/block1701171030/tab1/20171226094434.jpg";//第一张轮播图
     String HOME_IMG_BANDER_TWO = "https://www.2345.com/right/homepage/img/block1701171030/tab1/20171229133309.jpg";//第二张轮播图
