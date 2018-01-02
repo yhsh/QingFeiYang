@@ -155,13 +155,13 @@ public class PlayMusicNewActivity extends Activity implements View.OnClickListen
      * 准备
      */
     private void mediaPlayerSetup() {
-        if (isChange) {
+       /* if (isChange) {
             //歌曲切换后显示切换后歌曲的信息
             display_title.setText(song_names.get(position) + "-" + singer_name.get(position));
-        } else {
+        } else {*/
             //第一次进入播放页面显示点击的歌曲的信息
             display_title.setText(song_names.get(play_number) + "-" + singer_name.get(play_number));
-        }
+//        }
         handler.removeMessages(MSG_LYRIC_SHOW);
         handler.sendEmptyMessageDelayed(MSG_LYRIC_SHOW, 420);
     }
@@ -208,9 +208,10 @@ public class PlayMusicNewActivity extends Activity implements View.OnClickListen
     private void previous() {
         isChange = true;
         stop();
-        position--;
-        if (position < 0) {
-            position = Math.min(Math.min(song_names.size(), singer_name.size()), song_urls.size()) - 1;
+//        position--;
+        play_number--;
+        if (play_number < 0) {
+            play_number = Math.min(Math.min(song_names.size(), singer_name.size()), song_urls.size()) - 1;
         }
 //        Log.e("打印上一首歌曲", song_urls.get(position));
         mediaPlayerSetup();
@@ -222,9 +223,10 @@ public class PlayMusicNewActivity extends Activity implements View.OnClickListen
     private void next() {
         isChange = true;
         stop();
-        position++;
-        if (position >= Math.min(Math.min(song_names.size(), singer_name.size()), song_urls.size())) {
-            position = 0;
+//        position++;
+        play_number++;
+        if (play_number >= Math.min(Math.min(song_names.size(), singer_name.size()), song_urls.size())) {
+            play_number = 0;
         }
 //        Log.e("打印下一首歌曲", song_urls.get(position));
         mediaPlayerSetup();
@@ -282,11 +284,13 @@ public class PlayMusicNewActivity extends Activity implements View.OnClickListen
                 setLoading(false);
                 break;
             case STATE_SETUP:
-                File file = new File(Constant.lyricPath + song_names.get(position) + ".lrc");
+//                File file = new File(Constant.lyricPath + song_names.get(position) + ".lrc");
+                File file = new File(Constant.lyricPath + song_names.get(play_number) + ".lrc");
                 if (file.exists()) {
                     lyricView.setLyricFile(file, "GBK");
                 } else {
 //                    downloadLyric(song_lyrics[position], file);
+//                    downloadLyric(song_lyrics[play_number], file);
                 }
                 btnPlay.setImageResource(R.mipmap.m_icon_player_play_normal);
                 setLoading(true);
@@ -325,11 +329,11 @@ public class PlayMusicNewActivity extends Activity implements View.OnClickListen
                     mediaPlayer.setOnPreparedListener(PlayMusicNewActivity.this);
                     mediaPlayer.setOnCompletionListener(PlayMusicNewActivity.this);
                     mediaPlayer.setOnBufferingUpdateListener(PlayMusicNewActivity.this);
-                    if (isChange) {
+                   /* if (isChange) {
                         mediaPlayer.setDataSource(song_urls.get(position));//播放点击的那首歌曲
-                    } else {
+                    } else {*/
                         mediaPlayer.setDataSource(song_urls.get(play_number));//播放点击的那首歌曲
-                    }
+//                    }
                     mediaPlayer.prepareAsync();
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -446,7 +450,8 @@ public class PlayMusicNewActivity extends Activity implements View.OnClickListen
                 break;
             case R.id.bt_player_download:
                 //下载对应的歌曲
-                downSing(song_urls.get(position), singer_name.get(position), song_names.get(position));
+//                downSing(song_urls.get(position), singer_name.get(position), song_names.get(position));
+                downSing(song_urls.get(play_number), singer_name.get(play_number), song_names.get(play_number));
                 break;
             default:
                 break;
