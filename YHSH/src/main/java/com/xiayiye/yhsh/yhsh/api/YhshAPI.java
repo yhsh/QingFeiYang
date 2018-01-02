@@ -39,4 +39,8 @@ public interface YhshAPI {
     String RIDDLE = "http://api.tianapi.com/txapi/cityriddle/?key=e666faa73326fd34b46b2ae23964a91b";//地名谜语(天行数据API)
     String TONGUE_TWISTER = "http://api.tianapi.com/txapi/rkl/?key=e666faa73326fd34b46b2ae23964a91b";//绕口令(天行数据API)
     String IT_NEWS = "http://api.tianapi.com/it/?key=e666faa73326fd34b46b2ae23964a91b&num=";//IT新闻(天行数据API)
+    String HOME_IMG_BANDER_ONE = "https://www.2345.com/right/homepage/img/block1701171030/tab1/20171226094434.jpg";//第一张轮播图
+    String HOME_IMG_BANDER_TWO = "https://www.2345.com/right/homepage/img/block1701171030/tab1/20171229133309.jpg";//第二张轮播图
+    String HOME_IMG_BANDER_THREE = "https://www.2345.com/right/homepage/img/block1701171030/tab2/20171230100122.jpg";//第三张轮播图
+    String HOME_IMG_BANDER_FOUR = "http://www.2345.com/right/homepage/img/block1701171030/tab1/20171214095647.jpg";//第四张轮播图
 }
