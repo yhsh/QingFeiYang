@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:padding="5dp">
+
+    <EditText
+        android:id="@+id/home_music_kg_list_item_et"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:background="@drawable/home_music_kg_list_item_et_bg"
+        android:gravity="center"
+        android:hint="请输入歌曲名称搜索"
+        android:padding="5dp" />
+
+    <TextView
+        android:id="@+id/home_music_kg_list_item_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/home_music_kg_listview_item_bg"
+        android:clickable="true"
+        android:focusable="true"
+        android:paddingBottom="8dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:paddingTop="8dp"
+        android:text="搜索"
+        android:textSize="14sp" />
+</LinearLayout>

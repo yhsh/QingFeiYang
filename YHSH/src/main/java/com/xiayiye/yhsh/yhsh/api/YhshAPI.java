@@ -43,4 +43,9 @@ public interface YhshAPI {
     String HOME_IMG_BANDER_TWO = "https://www.2345.com/right/homepage/img/block1701171030/tab1/20171229133309.jpg";//第二张轮播图
     String HOME_IMG_BANDER_THREE = "https://www.2345.com/right/homepage/img/block1701171030/tab2/20171230100122.jpg";//第三张轮播图
     String HOME_IMG_BANDER_FOUR = "http://www.2345.com/right/homepage/img/block1701171030/tab1/20171214095647.jpg";//第四张轮播图
+    //    String KUGOU_MUSIC_ALL_BASE = "http://songsearch.kugou.com/song_search_v2?callback=jQuery1910026785707623246724_1490845878865&keyword=%E6%90%9C%E7%B4%A2%E6%AD%8C%E6%9B%B2%E5%90%8D&page=1&pagesize=";//后面加上int参数，现实多少首歌曲
+    String KUGOU_MUSIC_ALL_BASE = "http://songsearch.kugou.com/song_search_v2?callback=jQuery1910026785707623246724_1490845878865&keyword=";//后面加上int参数，现实多少首歌曲
+    String KUGOU_MUSIC_ALL_SONG_NAME = "&page=1&pagesize=";//歌曲名+此链接
+    String KUGOU_MUSIC_ALL_BASE_PAGE = "&userid=-1&%20clientver=&platform=WebFilter&tag=em&filter=2&iscorrection=1&privilege_filter=0&_=1490845878887";//KUGOU_MUSIC_ALL_BASE拼接上这个
+    String KUGOU_MUSIC_ALL_FILEHASH = "http://www.kugou.com/yy/index.php?r=play/getdata&hash=";//KUGOU_MUSIC_FileHash拼接上这个FileHash
 }

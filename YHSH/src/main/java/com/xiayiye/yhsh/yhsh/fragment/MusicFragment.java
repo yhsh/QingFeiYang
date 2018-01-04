@@ -26,6 +26,7 @@ import java.util.List;
 public class MusicFragment extends BaseHomeFragment {
     Fragment fragment;
     List<Fragment> list_music = new ArrayList<>();
+
     @Override
     public View initView() {
         return View.inflate(getActivity(), R.layout.activity_home_music, null);
@@ -36,6 +37,7 @@ public class MusicFragment extends BaseHomeFragment {
         FrameLayout home_music_ll_replace = view.findViewById(R.id.home_music_ll_replace);
         RadioGroup home_music_rg = view.findViewById(R.id.home_music_rg);
         RadioButton home_music_rb_new = view.findViewById(R.id.home_music_rb_new);
+        RadioButton home_music_rb_kg = view.findViewById(R.id.home_music_rb_kg);
 //        RadioButton home_music_rb_hot = view.findViewById(R.id.home_music_rb_hot);
         home_music_rb_new.setChecked(true);//默认最新歌曲
         fragment = new NewMusicFragment();
@@ -51,6 +53,10 @@ public class MusicFragment extends BaseHomeFragment {
                         break;
                     case R.id.home_music_rb_hot:
                         fragment = new HotMusicFragment();
+                        ft.replace(R.id.home_music_ll_replace, fragment).commit();
+                        break;
+                    case R.id.home_music_rb_kg:
+                        fragment = new KgMusicFragment();
                         ft.replace(R.id.home_music_ll_replace, fragment).commit();
                         break;
                 }

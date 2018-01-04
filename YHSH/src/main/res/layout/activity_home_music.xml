@@ -33,6 +33,17 @@
             android:padding="10dp"
             android:text="@string/home_music_hot" />
 
+        <RadioButton
+            android:id="@+id/home_music_rb_kg"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/home_button_bg"
+            android:button="@null"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="@string/home_music_kg" />
+
     </RadioGroup>
 
     <FrameLayout
