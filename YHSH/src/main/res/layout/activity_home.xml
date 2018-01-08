@@ -11,8 +11,10 @@
         android:layout_weight="1" />
 
     <TextView
+        android:background="@color/beige"
+        android:clickable="true"
         android:typeface="monospace"
-        android:textColor="@color/blue"
+        android:textColor="@color/red"
         android:padding="5dp"
         android:id="@+id/home_tv_pmd"
         android:layout_width="match_parent"

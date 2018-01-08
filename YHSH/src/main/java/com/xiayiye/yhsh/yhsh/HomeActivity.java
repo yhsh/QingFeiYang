@@ -4,9 +4,12 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -46,9 +49,9 @@ public class HomeActivity extends Activity {
                 for (int i = 0; i < newslist.length(); i++) {
                     list_date.add(newslist.getJSONObject(i).getString("lsdate"));
                     list_tittle.add(newslist.getJSONObject(i).getString("title"));
-                    history_today = history_today + list_date.get(i) + "-" + list_tittle.get(i) + "\n";
+                    history_today = history_today + list_date.get(i) + "-" + list_tittle.get(i) + "\n" + "                      点击此处：联系本人QQ！                     ";
                 }
-                home_tv_pmd.setText(history_today);
+                home_tv_pmd.setText("                           历史上的今天：" + history_today);
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -67,6 +70,13 @@ public class HomeActivity extends Activity {
         RadioButton rb_two = findViewById(R.id.rb_news);
         RadioButton rb_three = findViewById(R.id.rb_three);
         RadioButton rb_four = findViewById(R.id.rb_four);
+        home_tv_pmd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //联系我QQ
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("mqqwpa://im/chat?chat_type=wpa&uin=13343401268&version=1")));
+            }
+        });
         rg_bottom.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
