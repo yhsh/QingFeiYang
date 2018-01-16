@@ -5,4 +5,17 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <!-- 白天模式 -->
+    <style name="themeLight" parent="@android:style/Theme.Holo.Light">
+        <item name="android:color">@color/white</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <!-- 夜间模式 -->
+    <style name="ThemeNight" parent="@android:style/Theme.Holo">
+        <item name="android:color">@color/black</item>
+        <item name="android:textColor">@color/dodgerblue</item>
+    </style>
+
+
 </resources>
