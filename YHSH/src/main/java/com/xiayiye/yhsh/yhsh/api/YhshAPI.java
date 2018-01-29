@@ -48,4 +48,6 @@ public interface YhshAPI {
     String KUGOU_MUSIC_ALL_SONG_NAME = "&page=1&pagesize=";//歌曲名+此链接
     String KUGOU_MUSIC_ALL_BASE_PAGE = "&userid=-1&%20clientver=&platform=WebFilter&tag=em&filter=2&iscorrection=1&privilege_filter=0&_=1490845878887";//KUGOU_MUSIC_ALL_BASE拼接上这个
     String KUGOU_MUSIC_ALL_FILEHASH = "http://www.kugou.com/yy/index.php?r=play/getdata&hash=";//KUGOU_MUSIC_FileHash拼接上这个FileHash
+    String TRAIN_BASE = "http://apis.juhe.cn/train/s?name=";//查询火车车次的url基类
+    String TRAIN_KEY = "&key=f008317fef660e600c4acbc811d3493b";//查询火车车次的key
 }

@@ -10,6 +10,9 @@
         android:id="@+id/home_main_light"
         android:title="白天" />
     <item
+        android:id="@+id/home_main_tools"
+        android:title="工具" />
+    <item
         android:id="@+id/home_main_about"
         android:title="关于" />
 </menu>

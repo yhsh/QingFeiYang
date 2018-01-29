@@ -141,6 +141,10 @@ public class HomeActivity extends Activity {
                 //切换白天主题
                 changeToTheme(HomeActivity.this, 3);
                 break;
+            case R.id.home_main_tools:
+                //跳转到小工具页面
+                startActivity(new Intent(this, SmallToolsActivity.class));
+                break;
             case R.id.home_main_about:
                 //跳转到关于页面
                 startActivity(new Intent(this, AboutYHSHActivity.class));

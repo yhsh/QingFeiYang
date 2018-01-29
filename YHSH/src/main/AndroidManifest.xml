@@ -33,7 +33,9 @@
         <activity
             android:name=".PlayMusicNewActivity"
             android:theme="@android:style/Theme.Holo.Light.DarkActionBar" />
-        <activity android:name=".AboutYHSHActivity"></activity>
+        <activity android:name=".AboutYHSHActivity" />
+        <activity android:name=".SmallToolsActivity" />
+        <activity android:name=".TrainSearchActivity"></activity>
     </application>
 
 </manifest>

@@ -37,4 +37,13 @@
         <item>http://blog.csdn.net/carson_ho/article/details/52693322</item>
         <item>http://blog.csdn.net/carson_ho/article/details/52693322</item>
     </string-array>
+    <string-array name="tools">
+        <item>查询火车车次</item>
+        <item>查询常用快递</item>
+        <item>测试</item>
+        <item>测试</item>
+        <item>测试</item>
+        <item>测试</item>
+        <item>测试</item>
+    </string-array>
 </resources>
