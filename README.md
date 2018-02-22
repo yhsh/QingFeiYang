@@ -1,5 +1,7 @@
 初始化代码注释：<br />
 
+[查看英文版本](https://github.com/yhsh/QingFeiYang/blob/master/English%20Version) 
+
 更新时间：2018年1月29日15:13:38<br/>
 1.新增火车票车次查询<br/>
 
