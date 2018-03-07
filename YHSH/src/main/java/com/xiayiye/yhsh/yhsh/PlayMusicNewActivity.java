@@ -6,6 +6,7 @@ import android.animation.ValueAnimator;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.DownloadManager;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -32,16 +33,23 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import com.nineoldandroids.view.ViewHelper;
+import com.xiayiye.yhsh.yhsh.api.YhshAPI;
+import com.xiayiye.yhsh.yhsh.tools.GetNetworkJsonData;
 import com.xiayiye.yhsh.yhsh.tools.PreferenceUtil;
 import com.xiayiye.yhsh.yhsh.view.CustomRelativeLayout;
 import com.xiayiye.yhsh.yhsh.view.CustomSettingView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 /*import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
@@ -80,6 +88,8 @@ public class PlayMusicNewActivity extends Activity implements View.OnClickListen
     private ArrayList<String> singer_name;
     private int play_number;
     private boolean isChange = false;//默认进入此页面播放点击的歌曲
+    private String song_final_url;
+    private ProgressDialog pd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -144,6 +154,11 @@ public class PlayMusicNewActivity extends Activity implements View.OnClickListen
         song_names = (ArrayList<String>) getIntent().getSerializableExtra("sing_name");
         singer_name = (ArrayList<String>) getIntent().getSerializableExtra("singer_name");
 
+        //通过歌曲名称搜索歌曲拿到歌曲的f值
+        pd = ProgressDialog.show(this, "获取数据", "请稍等，获取歌曲中…………", false, false);
+        getSongF(pd, play_number);
+
+
        /* song_lyrics = getResources().getStringArray(R.array.song_lyrics);
         song_names = getResources().getStringArray(R.array.song_names);
         song_urls = getResources().getStringArray(R.array.song_urls);*/
@@ -151,17 +166,22 @@ public class PlayMusicNewActivity extends Activity implements View.OnClickListen
         mediaPlayerSetup();  // 准备
     }
 
+    private void getSongF(ProgressDialog pd, int play_number) {
+        try {
+            String search_str = URLEncoder.encode(song_names.get(play_number), "utf-8");//将中文转码成16进制,播放点击的歌曲
+//            String search_str = URLEncoder.encode("老公天下第一", "utf-8");//将中文转码成16进制
+            GetNetworkJsonData.TakeNetworkData(YhshAPI.QQMUSIC_SING_SEARCH_BASE + "10" + YhshAPI.QQMUSIC_SING_SEARCH_END + search_str, handler, 5, pd, this, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * 准备
      */
     private void mediaPlayerSetup() {
-       /* if (isChange) {
-            //歌曲切换后显示切换后歌曲的信息
-            display_title.setText(song_names.get(position) + "-" + singer_name.get(position));
-        } else {*/
-            //第一次进入播放页面显示点击的歌曲的信息
-            display_title.setText(song_names.get(play_number) + "-" + singer_name.get(play_number));
-//        }
+        //第一次进入播放页面显示点击的歌曲的信息
+        display_title.setText(song_names.get(play_number) + "-" + singer_name.get(play_number));
         handler.removeMessages(MSG_LYRIC_SHOW);
         handler.sendEmptyMessageDelayed(MSG_LYRIC_SHOW, 420);
     }
@@ -208,8 +228,8 @@ public class PlayMusicNewActivity extends Activity implements View.OnClickListen
     private void previous() {
         isChange = true;
         stop();
-//        position--;
-        play_number--;
+        play_number--;//获取上一首歌曲的f属性
+        getSongF(pd, play_number);
         if (play_number < 0) {
             play_number = Math.min(Math.min(song_names.size(), singer_name.size()), song_urls.size()) - 1;
         }
@@ -218,13 +238,13 @@ public class PlayMusicNewActivity extends Activity implements View.OnClickListen
     }
 
     /**
-     * 上一首
+     * 下一首
      */
     private void next() {
         isChange = true;
         stop();
-//        position++;
-        play_number++;
+        play_number++;//获取下一首歌曲的f属性
+        getSongF(pd, play_number);
         if (play_number >= Math.min(Math.min(song_names.size(), singer_name.size()), song_urls.size())) {
             play_number = 0;
         }
@@ -305,9 +325,31 @@ public class PlayMusicNewActivity extends Activity implements View.OnClickListen
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
+            if (msg.what == 5) {
+                String search_song = (String) msg.obj;
+                //打印搜索到的json数据
+//                Log.e("打印搜索数据", search_song);
+                initJsonData(search_song);
+            }
             handlerMethod(msg);
         }
     };
+
+    private void initJsonData(String search_song) {
+        //开始解析歌曲的f属性
+        try {
+            JSONObject jsonObject = new JSONObject(search_song);
+            String song_f = jsonObject.getJSONObject("data").getJSONObject("song").getJSONArray("list").getJSONObject(0).getString("f");
+//            Log.e("打印歌曲属性f", song_f);
+            //将字符串切割，获取到倒数第六个属性进行拼接参数播放歌曲
+            String[] split = song_f.split("\\|");
+            String s = split[split.length - 5];//解析出来的f属性值来拼接播放歌曲
+            song_final_url = YhshAPI.QQMUSIC_SING_URL_BASE + "C100" + s + YhshAPI.QQMUSIC_SING_ERL_END;
+//            Log.e("打印歌曲属性f", split[split.length - 5] + "===" + song_final_url);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
 
     private void handlerMethod(Message msg) {
         switch (msg.what) {
@@ -329,11 +371,8 @@ public class PlayMusicNewActivity extends Activity implements View.OnClickListen
                     mediaPlayer.setOnPreparedListener(PlayMusicNewActivity.this);
                     mediaPlayer.setOnCompletionListener(PlayMusicNewActivity.this);
                     mediaPlayer.setOnBufferingUpdateListener(PlayMusicNewActivity.this);
-                   /* if (isChange) {
-                        mediaPlayer.setDataSource(song_urls.get(position));//播放点击的那首歌曲
-                    } else {*/
-                        mediaPlayer.setDataSource(song_urls.get(play_number));//播放点击的那首歌曲
-//                    }
+//                    mediaPlayer.setDataSource(song_urls.get(play_number));//播放点击的那首歌曲
+                    mediaPlayer.setDataSource(song_final_url);//播放点击的那首歌曲
                     mediaPlayer.prepareAsync();
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -450,8 +489,8 @@ public class PlayMusicNewActivity extends Activity implements View.OnClickListen
                 break;
             case R.id.bt_player_download:
                 //下载对应的歌曲
-//                downSing(song_urls.get(position), singer_name.get(position), song_names.get(position));
                 downSing(song_urls.get(play_number), singer_name.get(play_number), song_names.get(play_number));
+                downSing(song_final_url, singer_name.get(play_number), song_names.get(play_number));
                 break;
             default:
                 break;

@@ -24,6 +24,8 @@ public interface YhshAPI {
     String QQMUSIC_IMG_URL_END = "_0.jpg";//QQ音乐图片后缀名称
     //http://ws.stream.qqmusic.qq.com/101369814.m4a?fromtag=46
     String QQMUSIC_SING_URL_BASE = "http://ws.stream.qqmusic.qq.com/";//QQ音乐播放链接基类
+    String QQMUSIC_SING_SEARCH_BASE = "http://s.music.qq.com/fcgi-bin/music_search_new_platform?t=0&n=";//QQ音乐搜索歌曲基类
+    String QQMUSIC_SING_SEARCH_END = "&aggr=1&cr=1&loginUin=0&format=json&inCharset=GB2312&outCharset=utf-8&notice=0&platform=jqminiframe.json&needNewCode=0&p=1&catZhida=0&remoteplace=sizer.newclient.next_song&w=";//QQ音乐搜索歌曲尾类后面加上搜歌歌曲歌名即可
     String QQMUSIC_SING_ERL_END = ".m4a?fromtag=46";//QQ音乐播放链接后缀
     String NEIHAN_TUIJIAN = "http://lf.snssdk.com/neihan/stream/mix/v1/?content_type=-101";//内涵段子首页推荐
     String NEIHAN_VIDEO = "http://lf.snssdk.com/neihan/stream/mix/v1/?content_type=-104";//内涵段子首页视频
