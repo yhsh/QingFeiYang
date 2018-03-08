@@ -1,25 +1,32 @@
+
 Initialization code annotation:
 
 [查看中文说明](https://github.com/yhsh/QingFeiYang/edit/master/README.md) 
 
+
 Update time: 12:36:06 March 8, 2018
 1. solve QQ music most hot song play link failure
 2. solve the conflict between QQ music and cool dog
-
 Update time: 18:21:40 March 7, 2018
 1. repair QQ music playback link failure
 
+
+Update time: 15:13:38 January 29, 2018
 1. new train ticket inquiries
+
+
 Update time: 16:27:07 January 16, 2018
 1. new topic switching
 2. new pages on the page
-
 Update time: 17:30:49 January 8, 2018
 1. click on the new marquee contact me
+
+
 Update time: 2018-1-4 18:02:31
 1. new cool dog music play
 2. new increase song search and play
 3. song disorderly, refresh into the playback page BUG
+
 
 Update time: 17:31:10 January 2, 2018
 1. new brain swerve
@@ -28,18 +35,21 @@ Update time: 17:31:10 January 2, 2018
 4. modify home carousel figure for net
 5. repair the next song BUG
 
+
 Update time: 17:48:15 December 29, 2017
 1. new paragraph pages
 2. to implement custom pull refresh
 3. to implement more custom drop-down loads
 4. to solve drop-down loading more bug
 
+
 Update time: 17:41:22 December 28, 2017
 1. beautify the music playback interface
 2. play music to improve the user experience
-3. add the next play
-The big reform of the 4. playback interface
+3. add the next playThe big reform of the 
+4. playback interface
 5. increase the song's lyric function and the color of the lyrics.
+
 
 Update time: 16:31:48 December 27, 2017
 1. new beauty chart page
@@ -47,11 +57,13 @@ Update time: 16:31:48 December 27, 2017
 3. click any beauty can enter full screen
 4. the current big picture loading pure code handwriting has OOM phenomenon, when entering the map page quickly slipping will break out
 
+
 Update time: 15:31:33 December 26, 2017
 1. new video playback plate
 2. modify the recommended video layout
 3. new video preview
 4. modify video playback mode, click video to play
+
 
 Update time: 17:49:16 December 25, 2017
 1. new additions to online video playback
