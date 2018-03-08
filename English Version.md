@@ -3,6 +3,12 @@ Initialization code annotation:
 
 [查看中文说明](https://github.com/yhsh/QingFeiYang/edit/master/README.md) 
 
+Update time: 16:51:21 March 8, 2018
+1. new QQ music most hot song play button state
+2. new QQ music search page, random song search, sound quality files small
+3. newly added QQ music search songs after downloading songs
+4. new increase QQ music click play music (hottest song playback page)
+
 
 Update time: 12:36:06 March 8, 2018
 1. solve QQ music most hot song play link failure
