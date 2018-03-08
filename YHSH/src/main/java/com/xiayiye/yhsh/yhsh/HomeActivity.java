@@ -9,8 +9,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.content.IntentCompat;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,13 +16,12 @@ import android.widget.FrameLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.xiayiye.yhsh.yhsh.api.YhshAPI;
 import com.xiayiye.yhsh.yhsh.fragment.FourFragment;
-import com.xiayiye.yhsh.yhsh.fragment.NewsFragment;
-import com.xiayiye.yhsh.yhsh.fragment.MusicFragment;
 import com.xiayiye.yhsh.yhsh.fragment.MoveFragment;
+import com.xiayiye.yhsh.yhsh.fragment.MusicFragment;
+import com.xiayiye.yhsh.yhsh.fragment.NewsFragment;
 import com.xiayiye.yhsh.yhsh.tools.GetNetworkJsonData;
 
 import org.json.JSONArray;
@@ -148,6 +145,10 @@ public class HomeActivity extends Activity {
             case R.id.home_main_about:
                 //跳转到关于页面
                 startActivity(new Intent(this, AboutYHSHActivity.class));
+                break;
+            case R.id.home_song_search:
+                //跳转到搜索歌曲页面页面
+                startActivity(new Intent(this, SearchSongActivity.class));
                 break;
         }
         return true;

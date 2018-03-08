@@ -2,10 +2,8 @@ package com.xiayiye.yhsh.yhsh.fragment;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -13,9 +11,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.xiayiye.yhsh.yhsh.PlayMusicActivity;
 import com.xiayiye.yhsh.yhsh.PlayMusicNewActivity;
 import com.xiayiye.yhsh.yhsh.R;
 import com.xiayiye.yhsh.yhsh.api.YhshAPI;
@@ -26,11 +22,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 创 建 者：下一页5（轻飞扬）
@@ -108,7 +100,7 @@ public class NewMusicFragment extends BaseHomeFragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 String sing_id = singer_id.get(i);
                 String sing_play_url = YhshAPI.QQMUSIC_SING_URL_BASE + sing_id + YhshAPI.QQMUSIC_SING_ERL_END;
-                Log.e("最新歌曲播放链接", sing_play_url);
+//                Log.e("最新歌曲播放链接", sing_play_url);
 //                Intent intent = new Intent(getActivity(), PlayMusicActivity.class);
                 Intent intent = new Intent(getActivity(), PlayMusicNewActivity.class);
                 /*intent.putExtra("sing_name", sing_name.get(i));

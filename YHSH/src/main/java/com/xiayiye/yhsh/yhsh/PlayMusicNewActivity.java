@@ -5,21 +5,16 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.annotation.TargetApi;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.DownloadManager;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewStub;
 import android.view.Window;
@@ -29,6 +24,16 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.nineoldandroids.view.ViewHelper;
+import com.xiayiye.yhsh.yhsh.api.YhshAPI;
+import com.xiayiye.yhsh.yhsh.tools.GetNetworkJsonData;
+import com.xiayiye.yhsh.yhsh.tools.PreferenceUtil;
+import com.xiayiye.yhsh.yhsh.view.CustomRelativeLayout;
+import com.xiayiye.yhsh.yhsh.view.CustomSettingView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -42,16 +47,6 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-
-import com.nineoldandroids.view.ViewHelper;
-import com.xiayiye.yhsh.yhsh.api.YhshAPI;
-import com.xiayiye.yhsh.yhsh.tools.GetNetworkJsonData;
-import com.xiayiye.yhsh.yhsh.tools.PreferenceUtil;
-import com.xiayiye.yhsh.yhsh.view.CustomRelativeLayout;
-import com.xiayiye.yhsh.yhsh.view.CustomSettingView;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 /*import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
@@ -187,7 +182,7 @@ public class PlayMusicNewActivity extends Activity implements View.OnClickListen
         //第一次进入播放页面显示点击的歌曲的信息
         display_title.setText(song_names.get(play_number) + "-" + singer_name.get(play_number));
         handler.removeMessages(MSG_LYRIC_SHOW);
-        handler.sendEmptyMessageDelayed(MSG_LYRIC_SHOW, 1000);
+        handler.sendEmptyMessageDelayed(MSG_LYRIC_SHOW, 420);
     }
 
     /**
@@ -380,8 +375,7 @@ public class PlayMusicNewActivity extends Activity implements View.OnClickListen
                     mediaPlayer.setOnBufferingUpdateListener(PlayMusicNewActivity.this);
                     if (playPage.equals("QQ")) {
                         if (TextUtils.isEmpty(song_final_url)) {
-                            AlertDialog.Builder builder = new AlertDialog.Builder(PlayMusicNewActivity.this);
-                            builder.setTitle("提示").setMessage("数据初始化中……").setPositiveButton("确定", null).show();
+                            Toast.makeText(PlayMusicNewActivity.this, "请退出扬宏豕慧重试！", Toast.LENGTH_SHORT).show();
                         } else {
                             mediaPlayer.setDataSource(song_final_url);//播放点击的那首歌曲
                         }
@@ -683,7 +677,12 @@ public class PlayMusicNewActivity extends Activity implements View.OnClickListen
                         //网络请求成功，获取流信息，转成歌曲文件
                         InputStream is = huc.getInputStream();
                         File file1 = new File(Environment.getExternalStorageDirectory() + "/Music_download/");
-                        File file2 = new File(Environment.getExternalStorageDirectory() + "/Music_download/", sing_name + "_" + singer_name + ".m4a");
+                        File file2 = null;
+                        if (playPage.equals("QQ")) {
+                            file2 = new File(Environment.getExternalStorageDirectory() + "/Music_download/", sing_name + "_" + singer_name + ".m4a");
+                        } else if (playPage.equals("KG")) {
+                            file2 = new File(Environment.getExternalStorageDirectory() + "/Music_download/", sing_name + "_" + singer_name + ".mp3");
+                        }
                         //不存在创建
                         if (!file1.exists()) {
                             file1.mkdir();

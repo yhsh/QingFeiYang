@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.xiayiye.yhsh.yhsh.SearchSongActivity">
+
+    <EditText
+        android:id="@+id/home_search_song_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:hint="请输入歌曲名称"
+        android:inputType="text"
+        android:padding="10dp" />
+
+    <Button
+        android:minHeight="40dp"
+        android:layout_margin="10dp"
+        android:textSize="14sp"
+        android:id="@+id/home_search_song_bt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/selector_player_playing_thumb"
+        android:text="搜索歌曲" />
+
+    <com.xiayiye.yhsh.yhsh.view.RefreshListView
+        android:id="@+id/home_search_song_rl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>

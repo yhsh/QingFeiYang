@@ -193,12 +193,12 @@ public class MoveFragment extends BaseHomeFragment {
 
     private void dismissDialog() {
         progressDialog.dismiss();//关闭对话框
-        getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(getActivity(), "服务器错误！", Toast.LENGTH_LONG).show();
-            }
-        });
+//        getActivity().runOnUiThread(new Runnable() {
+//            @Override
+//            public void run() {
+//                Toast.makeText(getActivity(), "服务器错误！", Toast.LENGTH_LONG).show();
+//            }
+//        });
     }
 
     @Override
