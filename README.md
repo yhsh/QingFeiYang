@@ -2,6 +2,13 @@
 
 [Reading English version](https://github.com/yhsh/QingFeiYang/blob/master/English%20Version.md) 
 
+更新时间：2018年3月8日16:51:21<br/>
+1.新增QQ音乐最热歌曲播放按钮状态<br/>
+2.新增QQ音乐搜索页面，任意歌曲随意搜，音质好文件小<br/>
+3.新增加QQ音乐搜索歌曲后长按下载歌曲<br/>
+4.新增加QQ音乐点击播放音乐(最热歌曲播放页面播放)<br/>
+
+
 更新时间：2018年3月8日12:36:06<br/>
 1.解决QQ音乐最热歌曲播放链接失效<br/>
 2.解决QQ音乐和酷狗播放冲突<br/>
