@@ -2,6 +2,10 @@
 
 [Reading English version](https://github.com/yhsh/QingFeiYang/blob/master/English%20Version) 
 
+更新时间：2018年3月8日12:36:06<br/>
+1.解决QQ音乐最热歌曲播放链接失效<br/>
+2.解决QQ音乐和酷狗播放冲突<br/>
+
 更新时间：2018年3月7日18:21:40<br/>
 1.修复QQ音乐播放链接失效<br/>
 
