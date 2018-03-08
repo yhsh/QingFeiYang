@@ -237,6 +237,7 @@ public class KgMusicFragment extends BaseHomeFragment {
                 intent.putExtra("play_number", i - num);
                 intent.putExtra("sing_name", song_play_song_name);
                 intent.putExtra("singer_name", song_play_singer_name);
+                intent.putExtra("playPage", "KG");//用来识别是QQ还是酷狗播放来源
                 Log.e("打印歌曲", song_play_song_name.get(i - num));
                 startActivity(intent);
             }

@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DownloadManager;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -17,6 +18,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewStub;
@@ -90,6 +92,7 @@ public class PlayMusicNewActivity extends Activity implements View.OnClickListen
     private boolean isChange = false;//默认进入此页面播放点击的歌曲
     private String song_final_url;
     private ProgressDialog pd;
+    private String playPage;//用于识别播放来源页面是QQ还是酷狗
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,7 +103,7 @@ public class PlayMusicNewActivity extends Activity implements View.OnClickListen
             setTranslucentStatus();
         }
         initAllViews();
-        initAllDatum();
+        initAllData();
     }
 
     @TargetApi(19)
@@ -148,12 +151,13 @@ public class PlayMusicNewActivity extends Activity implements View.OnClickListen
         setting_layout = (ViewStub) findViewById(R.id.main_setting_layout);
     }
 
-    private void initAllDatum() {
+    private void initAllData() {
         play_number = getIntent().getIntExtra("play_number", 0);//被点击的歌曲的position值
         song_urls = (ArrayList<String>) getIntent().getSerializableExtra("sing_play_url");
         song_names = (ArrayList<String>) getIntent().getSerializableExtra("sing_name");
         singer_name = (ArrayList<String>) getIntent().getSerializableExtra("singer_name");
-
+        playPage = getIntent().getStringExtra("playPage");
+//        Log.e("播放地址", song_urls.toString());
         //通过歌曲名称搜索歌曲拿到歌曲的f值
         pd = ProgressDialog.show(this, "获取数据", "请稍等，获取歌曲中…………", false, false);
         getSongF(pd, play_number);
@@ -183,7 +187,7 @@ public class PlayMusicNewActivity extends Activity implements View.OnClickListen
         //第一次进入播放页面显示点击的歌曲的信息
         display_title.setText(song_names.get(play_number) + "-" + singer_name.get(play_number));
         handler.removeMessages(MSG_LYRIC_SHOW);
-        handler.sendEmptyMessageDelayed(MSG_LYRIC_SHOW, 420);
+        handler.sendEmptyMessageDelayed(MSG_LYRIC_SHOW, 1000);
     }
 
     /**
@@ -325,11 +329,13 @@ public class PlayMusicNewActivity extends Activity implements View.OnClickListen
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            if (msg.what == 5) {
-                String search_song = (String) msg.obj;
-                //打印搜索到的json数据
+            if (playPage.equals("QQ")) {
+                if (msg.what == 5) {
+                    String search_song = (String) msg.obj;
+                    //打印搜索到的json数据
 //                Log.e("打印搜索数据", search_song);
-                initJsonData(search_song);
+                    initJsonData(search_song);
+                }
             }
             handlerMethod(msg);
         }
@@ -346,6 +352,7 @@ public class PlayMusicNewActivity extends Activity implements View.OnClickListen
             String s = split[split.length - 5];//解析出来的f属性值来拼接播放歌曲
             song_final_url = YhshAPI.QQMUSIC_SING_URL_BASE + "C100" + s + YhshAPI.QQMUSIC_SING_ERL_END;
 //            Log.e("打印歌曲属性f", split[split.length - 5] + "===" + song_final_url);
+//            Log.e("QQ音乐最终播放地址", song_final_url);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -371,8 +378,16 @@ public class PlayMusicNewActivity extends Activity implements View.OnClickListen
                     mediaPlayer.setOnPreparedListener(PlayMusicNewActivity.this);
                     mediaPlayer.setOnCompletionListener(PlayMusicNewActivity.this);
                     mediaPlayer.setOnBufferingUpdateListener(PlayMusicNewActivity.this);
-//                    mediaPlayer.setDataSource(song_urls.get(play_number));//播放点击的那首歌曲
-                    mediaPlayer.setDataSource(song_final_url);//播放点击的那首歌曲
+                    if (playPage.equals("QQ")) {
+                        if (TextUtils.isEmpty(song_final_url)) {
+                            AlertDialog.Builder builder = new AlertDialog.Builder(PlayMusicNewActivity.this);
+                            builder.setTitle("提示").setMessage("数据初始化中……").setPositiveButton("确定", null).show();
+                        } else {
+                            mediaPlayer.setDataSource(song_final_url);//播放点击的那首歌曲
+                        }
+                    } else if (playPage.equals("KG")) {
+                        mediaPlayer.setDataSource(song_urls.get(play_number));//播放点击的那首歌曲
+                    }
                     mediaPlayer.prepareAsync();
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -489,8 +504,11 @@ public class PlayMusicNewActivity extends Activity implements View.OnClickListen
                 break;
             case R.id.bt_player_download:
                 //下载对应的歌曲
-                downSing(song_urls.get(play_number), singer_name.get(play_number), song_names.get(play_number));
-                downSing(song_final_url, singer_name.get(play_number), song_names.get(play_number));
+                if (playPage.equals("QQ")) {
+                    downSing(song_final_url, singer_name.get(play_number), song_names.get(play_number));
+                } else if (playPage.equals("KG")) {
+                    downSing(song_urls.get(play_number), singer_name.get(play_number), song_names.get(play_number));
+                }
                 break;
             default:
                 break;

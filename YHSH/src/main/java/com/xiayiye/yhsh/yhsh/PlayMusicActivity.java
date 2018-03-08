@@ -1,14 +1,23 @@
 package com.xiayiye.yhsh.yhsh;
 
 import android.app.DownloadManager;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import com.xiayiye.yhsh.yhsh.api.YhshAPI;
+import com.xiayiye.yhsh.yhsh.tools.GetNetworkJsonData;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -16,9 +25,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
 
 public class PlayMusicActivity extends BaseActivity {
 
@@ -27,6 +38,20 @@ public class PlayMusicActivity extends BaseActivity {
     private String sing_play_url;//歌曲播放的地址
     private String sing_name;//歌曲名称
     private String singer_name;//歌手名字
+    private Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            if (msg.what == 1) {
+                String search_song = (String) msg.obj;
+                //打印搜索到的json数据
+//                Log.e("打印搜索数据", search_song);
+                initJsonData(search_song);
+            }
+        }
+    };
+    private String song_final_url;
+    private Button bt_player;
 
     @Override
     protected View initView() {
@@ -38,8 +63,16 @@ public class PlayMusicActivity extends BaseActivity {
         sing_play_url = getIntent().getStringExtra("sing_play_url");
         sing_name = getIntent().getStringExtra("sing_name");
         singer_name = getIntent().getStringExtra("singer_name");
+        ProgressDialog pd = ProgressDialog.show(this, "获取数据", "请稍等，获取歌曲中…………", false, false);
+        try {
+            String search_str = URLEncoder.encode(sing_name, "utf-8");//将中文转码成16进制,播放点击的歌曲
+//            String search_str = URLEncoder.encode("老公天下第一", "utf-8");//将中文转码成16进制
+            GetNetworkJsonData.TakeNetworkData(YhshAPI.QQMUSIC_SING_SEARCH_BASE + "10" + YhshAPI.QQMUSIC_SING_SEARCH_END + search_str, handler, 1, pd, this, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
 //        Log.e("打印歌曲：", sing_name + "歌手：" + singer_name);
-        Button bt_player = view.findViewById(R.id.bt_player);
+        bt_player = view.findViewById(R.id.bt_player);
         Button bt_player_download = view.findViewById(R.id.bt_player_download);
         mediaPlayer = new MediaPlayer();
         bt_player.setOnClickListener(this);
@@ -62,8 +95,9 @@ public class PlayMusicActivity extends BaseActivity {
 
     /**
      * 播放歌曲的方法
+     *
      * @param sing_play_url 歌曲的播放网址
-     * @param mediaPlayer 播放的类
+     * @param mediaPlayer   播放的类
      */
     public void playSing(String sing_play_url, MediaPlayer mediaPlayer) {
         Uri parse = Uri.parse(sing_play_url);
@@ -90,17 +124,21 @@ public class PlayMusicActivity extends BaseActivity {
             case R.id.bt_player:
                 if (isPlay) {
                     //暂停歌曲
+                    bt_player.setText("播放");
                     stopPlay(mediaPlayer);
                 } else {
                     //播放歌曲
-                    playSing(sing_play_url, mediaPlayer);
+//                    playSing(sing_play_url, mediaPlayer);
+                    bt_player.setText("暂停");
+                    playSing(song_final_url, mediaPlayer);
                 }
                 isPlay = !isPlay;
                 Toast.makeText(getApplicationContext(), isPlay ? "正在播放" : "停止播放了", Toast.LENGTH_LONG).show();
                 break;
             case R.id.bt_player_download:
                 //下载歌曲
-                downSing(sing_play_url, singer_name, sing_name);
+//                downSing(sing_play_url, singer_name, sing_name);
+                downSing(song_final_url, singer_name, sing_name);
                 break;
         }
     }
@@ -206,6 +244,23 @@ public class PlayMusicActivity extends BaseActivity {
             ShowSingExits("歌曲正在下载中,请到" + Environment.getExternalStorageDirectory() + "/Music_download/文件夹中查看！");
             //将下载任务加入下载队列，否则不会进行下载
             downloadManager.enqueue(request);
+        }
+    }
+
+    private void initJsonData(String search_song) {
+        //开始解析歌曲的f属性
+        try {
+            JSONObject jsonObject = new JSONObject(search_song);
+            String song_f = jsonObject.getJSONObject("data").getJSONObject("song").getJSONArray("list").getJSONObject(0).getString("f");
+//            Log.e("打印歌曲属性f", song_f);
+            //将字符串切割，获取到倒数第六个属性进行拼接参数播放歌曲
+            String[] split = song_f.split("\\|");
+            String s = split[split.length - 5];//解析出来的f属性值来拼接播放歌曲
+            song_final_url = YhshAPI.QQMUSIC_SING_URL_BASE + "C100" + s + YhshAPI.QQMUSIC_SING_ERL_END;
+//            Log.e("打印歌曲属性f", split[split.length - 5] + "===" + song_final_url);
+            Log.e("QQ音乐最终播放地址", song_final_url);
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 }

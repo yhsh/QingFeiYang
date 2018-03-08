@@ -117,6 +117,7 @@ public class NewMusicFragment extends BaseHomeFragment {
                 intent.putExtra("sing_name", sing_name);
                 intent.putExtra("play_number", i);
                 intent.putExtra("singer_name", singer_name);
+                intent.putExtra("playPage", "QQ");//用来识别是QQ还是酷狗播放来源
                 for (int j = 0; j < singer_id.size(); j++) {
                     sing_url.add(YhshAPI.QQMUSIC_SING_URL_BASE + singer_id.get(j) + YhshAPI.QQMUSIC_SING_ERL_END);
                 }
