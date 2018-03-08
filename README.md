@@ -1,6 +1,6 @@
 初始化代码注释：<br />
 
-[Reading English version](https://github.com/yhsh/QingFeiYang/blob/master/English%20Version) 
+[Reading English version](https://github.com/yhsh/QingFeiYang/blob/master/English%20Version.md) 
 
 更新时间：2018年3月8日12:36:06<br/>
 1.解决QQ音乐最热歌曲播放链接失效<br/>
