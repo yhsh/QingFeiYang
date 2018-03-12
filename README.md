@@ -2,6 +2,11 @@
 
 [Reading English version](https://github.com/yhsh/QingFeiYang/blob/master/English%20Version.md) 
 
+更新时间：2018年3月12日18:06:27<br/>
+1.新增酷狗音乐MV搜索(搜索有bug)<br/>
+2.新增酷狗音乐MV下载<br/>
+3.新增酷狗音乐MV播放(开发中)<br/><br/>
+
 更新时间：2018年3月8日16:51:21<br/>
 1.新增QQ音乐最热歌曲播放按钮状态<br/>
 2.新增QQ音乐搜索页面，任意歌曲随意搜，音质好文件小<br/>
