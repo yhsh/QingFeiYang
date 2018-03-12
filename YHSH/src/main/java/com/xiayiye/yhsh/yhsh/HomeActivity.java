@@ -147,8 +147,12 @@ public class HomeActivity extends Activity {
                 startActivity(new Intent(this, AboutYHSHActivity.class));
                 break;
             case R.id.home_song_search:
-                //跳转到搜索歌曲页面页面
+                //跳转到搜索歌曲页面
                 startActivity(new Intent(this, SearchSongActivity.class));
+                break;
+            case R.id.home_mv_search:
+                //跳转到搜索MV页面
+                startActivity(new Intent(this, SearchMVActivity.class));
                 break;
         }
         return true;

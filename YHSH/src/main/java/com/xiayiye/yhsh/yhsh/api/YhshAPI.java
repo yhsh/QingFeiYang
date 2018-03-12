@@ -50,6 +50,14 @@ public interface YhshAPI {
     String KUGOU_MUSIC_ALL_SONG_NAME = "&page=1&pagesize=";//歌曲名+此链接
     String KUGOU_MUSIC_ALL_BASE_PAGE = "&userid=-1&%20clientver=&platform=WebFilter&tag=em&filter=2&iscorrection=1&privilege_filter=0&_=1490845878887";//KUGOU_MUSIC_ALL_BASE拼接上这个
     String KUGOU_MUSIC_ALL_FILEHASH = "http://www.kugou.com/yy/index.php?r=play/getdata&hash=";//KUGOU_MUSIC_FileHash拼接上这个FileHash
+    //酷狗MV搜索：http://mvsearch.kugou.com/mv_search?keyword=樱花草&page=1&pagesize=30&userid=-1&clientver=&platform=WebFilter&tag=em&filter=2&iscorrection=1&privilege_filter=0&_=1515052279917
+    String KUGOU_MUSIC_MV_SEARCH_BASE = "http://mvsearch.kugou.com/mv_search?keyword=";//
+    String KUGOU_MUSIC_MV_SEARCH_PAGE = "&page=";//第几页
+    String KUGOU_MUSIC_MV_SEARCH_PAGESIZE = "&pagesize=";//每页几条
+    String KUGOU_MUSIC_MV_SEARCH_OTHER = "&userid=-1&clientver=&platform=WebFilter&tag=em&filter=2&iscorrection=1&privilege_filter=0&_=1515052279917";//酷狗搜索的尾数拼接
+    //通过hash值搜索mv得到mv的播放地址：http://m.kugou.com/app/i/mv.php?cmd=100&hash=5F8393A55D5762A63F1A5E92B46E575E&ismp3=1&ext=mp4
+    String KUGOU_MUSIC_MV_URL_BASE = "http://m.kugou.com/app/i/mv.php?cmd=100&hash=";//酷狗MV的hash值拼接
+    String KUGOU_MUSIC_MV_URL_QUALITY = "&ismp3=1";//酷狗MV的视频格式音质等,不要这段拼接就表示默认mkv格式
     String TRAIN_BASE = "http://apis.juhe.cn/train/s?name=";//查询火车车次的url基类
     String TRAIN_KEY = "&key=f008317fef660e600c4acbc811d3493b";//查询火车车次的key
 }

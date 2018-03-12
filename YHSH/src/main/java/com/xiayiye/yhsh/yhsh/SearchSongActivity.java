@@ -47,7 +47,7 @@ public class SearchSongActivity extends BaseActivity {
     ArrayList<String> song_name = new ArrayList<>();//歌曲名字
     ArrayList<String> singer_name = new ArrayList<>();//歌手名字
     ArrayList<String> song_url_list = new ArrayList<>();//歌曲链接集合
-    int default_num = 15;
+    int default_num = 10;
     int page = 1;
     private Handler handler = new Handler() {
         @Override
