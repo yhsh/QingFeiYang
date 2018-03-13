@@ -1,7 +1,7 @@
 
 Initialization code annotation:
 
-[查看中文说明](https://github.com/yhsh/QingFeiYang/edit/master/README.md) 
+[查看中文说明](https://github.com/yhsh/QingFeiYang/blob/master/README.md) 
 
 Update time; 14:25:27, March 13, 2018
 1. failed bug to repair part of MV Download
