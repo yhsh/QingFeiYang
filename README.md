@@ -2,6 +2,11 @@
 
 [Reading English version](https://github.com/yhsh/QingFeiYang/blob/master/English%20Version.md) 
 
+更新时间;2018年3月13日14:25:27<br/>
+1.修复部分MV下载失败的bug<br/>
+2.修复下拉刷新奔溃错误，刷新默认第一页<br/>
+3.解决上拉加载更多bug<br/><br/>
+
 更新时间：2018年3月12日18:06:27<br/>
 1.新增酷狗音乐MV搜索(搜索有bug)<br/>
 2.新增酷狗音乐MV下载<br/>
