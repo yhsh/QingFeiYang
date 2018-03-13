@@ -3,6 +3,18 @@ Initialization code annotation:
 
 [查看中文说明](https://github.com/yhsh/QingFeiYang/edit/master/README.md) 
 
+Update time; 14:25:27, March 13, 2018
+1. failed bug to repair part of MV Download
+2. repair drop-down refresh error, refresh the default first page
+3. to solve pullup loading more bug
+
+
+Update time: 18:06:27 March 12, 2018
+1. new MV search for cool dog music (search for bug)
+2. new cool dog music MV Download
+3. new cool dog music MV playback (Development)
+
+
 Update time: 16:51:21 March 8, 2018
 1. new QQ music most hot song play button state
 2. new QQ music search page, random song search, sound quality files small
