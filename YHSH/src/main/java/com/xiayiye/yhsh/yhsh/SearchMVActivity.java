@@ -6,9 +6,7 @@ import android.os.Build;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
-import android.os.SystemClock;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -52,7 +50,6 @@ public class SearchMVActivity extends BaseActivity {
     ArrayList<String> singer_list = new ArrayList<>();//歌手值的集合
     ArrayList<String> song_list = new ArrayList<>();//歌曲值的集合
     ArrayList<String> mv_url_list = new ArrayList<>();//MV的播放地址
-    //    ArrayList<String> file_name_list = new ArrayList<>();//文件名字的集合
     private KGMVListAdapter adapter;
     //    private String mv_download_url = "http://fs.mv.web.kugou.com/201803121636/bfa7b16538a850c3d4b4033e90fcdb07/G042/M06/00/1F/yoYBAFXuwdiAXc_2AU4xQp80K64234.mkv";//MV的下载地址
     private String mv_download_url;//MV的下载地址
@@ -60,29 +57,33 @@ public class SearchMVActivity extends BaseActivity {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            if (msg.what == 0) {
-                String search_song = (String) msg.obj;
-                //打印搜索到的json数据
-                Log.e("打印data搜索数据", search_song);
-                initJsonData(search_song);
-                if (page > 1) {
-                    adapter.notifyDataSetChanged();
-                }
-            } else if (msg.what == 1) {
-                //通过hash值拼接搜索得到MV的播放地址
-                String str_mv_data = (String) msg.obj;
-//                Log.e("打印搜索数据", str_mv_data);
-                initJsonDataMVUrl(str_mv_data);
-            }
+            jsonMsg(msg);
         }
     };
+
+    private void jsonMsg(Message msg) {
+        if (msg.what == 0) {
+            String search_song = (String) msg.obj;
+            //打印搜索到的json数据
+//                Log.e("打印data搜索数据", search_song);
+            initJsonData(search_song);
+            if (page > 1) {
+                adapter.notifyDataSetChanged();
+            }
+        } else if (msg.what == 1) {
+            //通过hash值拼接搜索得到MV的播放地址
+            String str_mv_data = (String) msg.obj;
+//                Log.e("打印搜索数据", str_mv_data);
+            initJsonDataMVUrl(str_mv_data);
+        }
+    }
 
     private void initJsonDataMVUrl(String str_mv_data) {
         //解析MV的播放地址
         try {
             JSONObject jsonObject = new JSONObject(str_mv_data);
             mv_download_url = jsonObject.getJSONObject("mvdata").getJSONObject("sd").getString("downurl");
-            Log.e("打印MV地址", mv_download_url);
+//            Log.e("打印MV地址", mv_download_url);
             mv_url_list.add(mv_download_url);
         } catch (JSONException e) {
             e.printStackTrace();
@@ -94,17 +95,20 @@ public class SearchMVActivity extends BaseActivity {
         try {
             JSONObject jsonObject = new JSONObject(search_song);
             JSONArray json_list = jsonObject.getJSONObject("data").getJSONArray("lists");
+            if (page == 1) {
+                hash_list.clear();
+                singer_list.clear();
+                song_list.clear();
+            }
             for (int i = 0; i < json_list.length(); i++) {
                 hash_list.add(json_list.getJSONObject(i).getString("MvHash"));
                 singer_list.add(json_list.getJSONObject(i).getString("SingerName"));
                 song_list.add(json_list.getJSONObject(i).getString("MvName"));
-//                file_name_list.add(json_list.getJSONObject(i).getString("FileName"));
             }
             //通过hash值搜索MV的播放地址
             for (int i = 0; i < hash_list.size(); i++) {
                 GetNetworkJsonData.TakeNetworkData(YhshAPI.KUGOU_MUSIC_MV_URL_BASE + hash_list.get(i) + YhshAPI.KUGOU_MUSIC_MV_URL_QUALITY, handler, 1, pd, this, "UTF-8");
             }
-//            GetNetworkJsonData.TakeNetworkData(YhshAPI.KUGOU_MUSIC_MV_URL_BASE + hash_list.get(0) + YhshAPI.KUGOU_MUSIC_MV_URL_QUALITY , handler, 0, pd, this, "UTF-8");
             showMVList();
         } catch (JSONException e) {
             e.printStackTrace();
@@ -145,13 +149,27 @@ public class SearchMVActivity extends BaseActivity {
             } else {
                 viewHolder = (ViewHolder) convertView.getTag();
             }
-            if (song_list.get(i).contains("<")) {
+//            Log.e("打印歌曲数量", song_list.size() + "");
+            /*if (song_list.get(i).contains("<")) {
                 String sp_song_name = song_list.get(i).substring(4, song_list.get(i).length() - 5);
                 viewHolder.home_search_song_song_name.setText("MV歌名：" + sp_song_name);
             } else {
                 viewHolder.home_search_song_song_name.setText("MV歌名：" + song_list.get(i));
             }
-            viewHolder.home_search_singer_song_name.setText("MV歌手：" + singer_list.get(i));
+            viewHolder.home_search_singer_song_name.setText("MV歌手：" + singer_list.get(i));*/
+
+
+            if (song_list.get(i).contains("<em>")) {
+//                String sp_song_name = song_list.get(i).substring(4, song_list.get(i).length() - 5);
+                viewHolder.home_search_song_song_name.setText("MV歌名：" + song_list.get(i).replace("<em>", "").replace("</em>", ""));
+            } else {
+                viewHolder.home_search_song_song_name.setText("MV歌名：" + song_list.get(i));
+            }
+            if (singer_list.get(i).contains("<em>")) {
+                viewHolder.home_search_singer_song_name.setText("MV歌手：" + singer_list.get(i).replace("<em>", "").replace("</em>", ""));
+            } else {
+                viewHolder.home_search_singer_song_name.setText("MV歌手：" + singer_list.get(i));
+            }
             return convertView;
         }
     }
@@ -180,9 +198,10 @@ public class SearchMVActivity extends BaseActivity {
         home_search_mv_rl.setOnRefreshListener(new RefreshListView.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                song_list.clear();
-                singer_list.clear();//清空之前的数据
-                getMVMessage(default_num * page);
+//                song_list.clear();
+//                singer_list.clear();//清空之前的数据
+                page = 1;//初始化page为第一页
+                getMVMessage(page);
                 home_search_mv_rl.setOnLoadFinish();//加载完成
             }
         });
@@ -203,7 +222,6 @@ public class SearchMVActivity extends BaseActivity {
                 GetNetworkJsonData.TakeNetworkData(YhshAPI.KUGOU_MUSIC_MV_URL_BASE + hash_list.get(i - 1) + YhshAPI.KUGOU_MUSIC_MV_URL_QUALITY, handler, 1, pd, SearchMVActivity.this, "UTF-8");
                 Toast.makeText(SearchMVActivity.this, "跳转播放歌MV", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(SearchMVActivity.this, PlayMVActivity.class);
-//                Log.e("打印歌曲url", mv_url_list.get(i - 1));
                 intent.putExtra("mv_play_url", mv_url_list.get(i - 1));//歌曲播放链接
                 intent.putExtra("mv_sing_name", song_list.get(i - 1));//歌曲名字
                 intent.putExtra("mv_singer_name", singer_list.get(i - 1));//歌手名字
@@ -220,14 +238,21 @@ public class SearchMVActivity extends BaseActivity {
                 if (Build.VERSION.SDK_INT < 23) {
                     GetNetworkJsonData.TakeNetworkData(YhshAPI.KUGOU_MUSIC_MV_URL_BASE + hash_list.get(i - 1) + YhshAPI.KUGOU_MUSIC_MV_URL_QUALITY, handler, 1, pd, SearchMVActivity.this, "UTF-8");
                     Toast.makeText(SearchMVActivity.this, "开始下载MV", Toast.LENGTH_LONG).show();
-//                    Log.e("打印mv",YhshAPI.KUGOU_MUSIC_MV_URL_BASE + hash_list.get(i-1) + YhshAPI.KUGOU_MUSIC_MV_URL_QUALITY);
-                    if (song_list.get(i - 1).contains("<")) {
-                        String sp_song_name = song_list.get(i - 1).substring(4, song_list.get(i - 1).length() - 5);
-//                        Log.e("打印歌曲名字", sp_song_name + mv_download_url);
-//                        Log.e("打印歌曲名字", sp_song_name + mv_url_list.get(i-1));
-                        downSing(mv_url_list.get(i-1), singer_list.get(i - 1), sp_song_name);
+                    if (song_list.get(i - 1).contains("<em>")) {
+                        String sp_song_name = song_list.get(i - 1).replace("<em>", "").replace("</em>", "");//替换特殊符号后的歌曲名字
+                        if (singer_list.get(i - 1).contains("<em>")) {
+                            String sp_singer_name = singer_list.get(i - 1).replace("<em>", "").replace("</em>", "");//替换特殊符号后的歌手名字
+                            downSing(mv_url_list.get(i - 1), sp_singer_name, sp_song_name);
+                        } else {
+                            downSing(mv_url_list.get(i - 1), singer_list.get(i - 1), sp_song_name);
+                        }
                     } else {
-                        downSing(mv_url_list.get(i-1), singer_list.get(i - 1), song_list.get(i - 1));
+                        if (singer_list.get(i - 1).contains("<em>")) {
+                            String sp_singer_name = singer_list.get(i - 1).replace("<em>", "").replace("</em>", "");//替换特殊符号后的歌手名字
+                            downSing(mv_url_list.get(i - 1), sp_singer_name, song_list.get(i - 1));
+                        } else {
+                            downSing(mv_url_list.get(i - 1), singer_list.get(i - 1), song_list.get(i - 1));
+                        }
                     }
                 } else {
                     Toast.makeText(SearchMVActivity.this, "你手机版本高于Android6.0请手动打开权限下载MV", Toast.LENGTH_LONG).show();
@@ -252,7 +277,6 @@ public class SearchMVActivity extends BaseActivity {
                     singer_list.clear();
 //                    song_url_list.clear();//清空之前的歌曲地址
                     page = 1;//再次搜索初始化第一页
-                    adapter.notifyDataSetChanged();
                 }
                 //点击之前获取文本框歌曲信息
                 getMVMessage(page);
