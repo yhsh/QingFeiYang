@@ -348,7 +348,8 @@ public class SearchMVActivity extends BaseActivity {
                     //清空所有之前搜索的数据
                     song_list.clear();
                     singer_list.clear();
-//                    song_url_list.clear();//清空之前的歌曲地址
+                    mv_url_list.clear();//清空之前的MV的MKV地址
+                    mv_url_list_mp4.clear();//清空之前的MV的MP4地址
                     page = 1;//再次搜索初始化第一页
                 }
                 //点击之前获取文本框歌曲信息

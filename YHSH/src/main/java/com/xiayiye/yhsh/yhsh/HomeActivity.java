@@ -1,14 +1,21 @@
 package com.xiayiye.yhsh.yhsh;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
+import android.content.ActivityNotFoundException;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,6 +36,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class HomeActivity extends Activity {
     ArrayList<String> list_date = new ArrayList<>();//相同日期的年份
@@ -46,6 +54,7 @@ public class HomeActivity extends Activity {
     private RadioButton rb_news;
     private RadioButton rb_three;
     private RadioButton rb_four;
+    private boolean isNo;
 
     private void initJson(String str) {
         try {
@@ -80,8 +89,28 @@ public class HomeActivity extends Activity {
         home_tv_pmd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //联系我QQ
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("mqqwpa://im/chat?chat_type=wpa&uin=13343401268&version=1")));
+                if (isQQClientAvailable(HomeActivity.this)) {
+                    //联系我QQ
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("mqqwpa://im/chat?chat_type=wpa&uin=13343401268&version=1")));
+                } else {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(HomeActivity.this);
+                    builder.setTitle("温馨提示：").setMessage("清先安装QQ再联系本人");
+                    builder.setPositiveButton("安装", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            //跳转到默认应用市场安装QQ
+                            boolean b = goToMarket();
+                            if (b) {
+                                //如果没有应用市场，就跳转默认浏览器
+                                Uri uri = Uri.parse("https://im.qq.com/download/");
+                                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                                startActivity(intent);
+                            }
+                        }
+                    });
+                    builder.setNegativeButton("不安装", null);
+                    builder.show();
+                }
             }
         });
         rg_bottom.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -185,4 +214,41 @@ public class HomeActivity extends Activity {
                 break;
         }
     }
+
+    /**
+     * 判断 用户是否安装QQ客户端
+     */
+    public static boolean isQQClientAvailable(Context context) {
+        final PackageManager packageManager = context.getPackageManager();
+        List<PackageInfo> pinfo = packageManager.getInstalledPackages(0);
+        if (pinfo != null) {
+            for (int i = 0; i < pinfo.size(); i++) {
+                String pn = pinfo.get(i).packageName;
+                Log.e("打印包名", "pn = " + pn);
+                if (pn.equalsIgnoreCase("com.tencent.qqlite") || pn.equalsIgnoreCase("com.tencent.mobileqq")) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * 跳转到应用市场下载
+     * @return 根据返回的Boolean
+     * 判断是进入应用市场下载还是打开默认浏览器进行网页下载
+     */
+    public boolean goToMarket() {
+        Uri uri = Uri.parse("market://details?id=" + "com.tencent.mobileqq");
+        Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+        try {
+            startActivity(goToMarket);
+            isNo = false;//表示应用市场存在
+        } catch (ActivityNotFoundException e) {
+            e.printStackTrace();
+            return true;
+        }
+        return false;
+    }
+
 }

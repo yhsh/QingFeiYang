@@ -43,7 +43,7 @@
         <activity
             android:name=".PlayMVActivity"
             android:screenOrientation="landscape"
-            android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen" />
+            android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen" />
     </application>
 
 </manifest>
