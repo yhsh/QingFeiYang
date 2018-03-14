@@ -4,7 +4,7 @@ Initialization code annotation:
 [查看中文说明](https://github.com/yhsh/QingFeiYang/blob/master/README.md)
 
 Update time: 16:01:11 March 14, 2018
-1. repair two search MV downloads is the BUG of the unified MV
+1. repair two search MV downloads is the BUG of the same file
 2. click on the home page to solve problems and break the Marquee
 3. QQ directly jumps to contact my author, without QQ to download QQ with its own application market, and download QQ without the application market to the default browser
 
