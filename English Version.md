@@ -3,6 +3,12 @@ Initialization code annotation:
 
 [查看中文说明](https://github.com/yhsh/QingFeiYang/blob/master/README.md)
 
+Update time: 16:01:11 March 14, 2018
+1. repair two search MV downloads is the BUG of the unified MV
+2. click on the home page to solve problems and break the Marquee
+3. QQ directly jumps to contact my author, without QQ to download QQ with its own application market, and download QQ without the application market to the default browser
+
+
 Update time: 13:52:36 March 14, 2018
 1. new growth in MKV format after MV, MP4 format MV Download
 2. add MP4 format to click online playback

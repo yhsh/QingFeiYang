@@ -2,6 +2,12 @@
 
 [Reading English version](https://github.com/yhsh/QingFeiYang/blob/master/English%20Version.md) 
 
+更新时间：2018年3月14日16:01:11<br/>
+1.修复二次搜索MV下载是统一MV的BUG<br/>
+2.解决点击主页跑马灯蹦溃的问题<br/>
+3.有QQ直接跳转联系本人作者，无QQ就用自带应用市场下载QQ,无应用市场就跳转到默认浏览器下载QQ<br/><br/>
+
+
 更新时间：2018年3月14日13:52:36<br/>
 1.新增长按MV后出现mkv格式，MP4格式MV下载<br/>
 2.新增MP4格式点击在线播放功能<br/>
