@@ -58,6 +58,7 @@ public interface YhshAPI {
     //通过hash值搜索mv得到mv的播放地址：http://m.kugou.com/app/i/mv.php?cmd=100&hash=5F8393A55D5762A63F1A5E92B46E575E&ismp3=1&ext=mp4
     String KUGOU_MUSIC_MV_URL_BASE = "http://m.kugou.com/app/i/mv.php?cmd=100&hash=";//酷狗MV的hash值拼接
     String KUGOU_MUSIC_MV_URL_QUALITY = "&ismp3=1";//酷狗MV的视频格式音质等,不要这段拼接就表示默认mkv格式
+    String KUGOU_MUSIC_MV_URL_QUALITY_MP4 = "&ismp3=1&ext=mp4";//酷狗MV的视频格式音质等,拼接此处表示MP4格式的MV
     String TRAIN_BASE = "http://apis.juhe.cn/train/s?name=";//查询火车车次的url基类
     String TRAIN_KEY = "&key=f008317fef660e600c4acbc811d3493b";//查询火车车次的key
 }

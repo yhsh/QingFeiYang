@@ -1,7 +1,13 @@
 
 Initialization code annotation:
 
-[查看中文说明](https://github.com/yhsh/QingFeiYang/blob/master/README.md) 
+[查看中文说明](https://github.com/yhsh/QingFeiYang/blob/master/README.md)
+
+Update time: 13:52:36 March 14, 2018
+1. new growth in MKV format after MV, MP4 format MV Download
+2. add MP4 format to click online playback
+3. increase the control button when playing MV
+
 
 Update time; 14:25:27, March 13, 2018
 1. failed bug to repair part of MV Download

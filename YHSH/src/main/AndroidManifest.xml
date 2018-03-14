@@ -40,7 +40,10 @@
         <activity android:name=".TrainSearchActivity" />
         <activity android:name=".SearchSongActivity" />
         <activity android:name=".SearchMVActivity" />
-        <activity android:name=".PlayMVActivity"></activity>
+        <activity
+            android:name=".PlayMVActivity"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen" />
     </application>
 
 </manifest>
