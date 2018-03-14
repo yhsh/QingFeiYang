@@ -2,10 +2,10 @@
 
 [Reading English version](https://github.com/yhsh/QingFeiYang/blob/master/English%20Version.md) 
 
-更新时间：2018年3月14日13:52:36
-1.新增长按MV后出现mkv格式，MP4格式MV下载
-2.新增MP4格式点击在线播放功能
-3.播放MV的时候增加控制按钮
+更新时间：2018年3月14日13:52:36<br/>
+1.新增长按MV后出现mkv格式，MP4格式MV下载<br/>
+2.新增MP4格式点击在线播放功能<br/>
+3.播放MV的时候增加控制按钮<br/><br/>
 
 更新时间;2018年3月13日14:25:27<br/>
 1.修复部分MV下载失败的bug<br/>
