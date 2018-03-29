@@ -2,6 +2,7 @@
 Initialization code annotation:
 
 [查看中文说明](https://github.com/yhsh/QingFeiYang/blob/master/README.md)
+
 Update time: 14:57:31 March 29, 2018
 1. new pages about my page can jump my blog
 2. about my page to open my blog in APP
