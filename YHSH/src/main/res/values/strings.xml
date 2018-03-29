@@ -7,4 +7,6 @@
     <string name="home_music_hot">最热歌曲</string>
     <string name="home_music_kg">酷狗歌曲</string>
     <string name="about_me"> 关于本APP\n作者：扬宏豕慧\n联系QQ：2703401268\n个人小站：http://www.iyhsh.icoc.in/</string>
+    <string name="open_blog">打开我的博客</string>
+    <string name="look_my_blog">查看我的博客</string>
 </resources>

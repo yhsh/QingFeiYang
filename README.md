@@ -2,6 +2,11 @@
 
 [Reading English version](https://github.com/yhsh/QingFeiYang/blob/master/English%20Version.md) 
 
+更新时间：2018年3月29日14:57:31<br/>
+1.新增关于我的页面可跳转我的博客<br/>
+2.关于我的页面可在APP打开我的博客<br/>
+3.点击文字可打开作者QQ资料<br/><br/>
+
 更新时间：2018年3月14日16:01:11<br/>
 1.修复二次搜索MV下载是相同文件的BUG<br/>
 2.解决点击主页跑马灯蹦溃的问题<br/>

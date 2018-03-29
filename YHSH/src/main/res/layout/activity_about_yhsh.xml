@@ -3,12 +3,56 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:textSize="18sp"
-        android:padding="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="@string/about_me"
-        android:textIsSelectable="true" />
+    <RelativeLayout
+        android:id="@+id/view_gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:clickable="true"
+            android:focusable="true"
+            android:id="@+id/about"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:padding="10dp"
+            android:text="@string/about_me"
+            android:textIsSelectable="true"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/open_my_blog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/about"
+            android:layout_centerInParent="true"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="10dp"
+            android:text="@string/open_blog"
+            android:textColor="@color/red"
+            android:textIsSelectable="true"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/look_my_blog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/open_my_blog"
+            android:layout_centerInParent="true"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="10dp"
+            android:text="@string/look_my_blog"
+            android:textColor="@color/red"
+            android:textIsSelectable="true"
+            android:textSize="18sp" />
+
+    </RelativeLayout>
+
+    <WebView
+        android:id="@+id/wv_my_blog"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible" />
 </RelativeLayout>
