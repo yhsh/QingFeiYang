@@ -64,6 +64,7 @@ public class TuiJianFragment extends BaseHomeFragment {
                     img_cover_url_list.add(img_url_list.getJSONObject(0).getString("url"));
                 } else {
                     share_video_list.add(group.getString("share_url"));
+                    title_video_list.add(group.getString("内涵段子已关闭"));
                 }
 //                Log.e("打印下载地址：", down_video_list.toString());
 //                Log.e("打印分享地址：", share_video_list.toString());
@@ -86,7 +87,9 @@ public class TuiJianFragment extends BaseHomeFragment {
     protected void initData(View view) {
         pd = ProgressDialog.show(getActivity(), "加载数据中", "获取最新数据……", false, false);
         home_tuijian_lv = view.findViewById(R.id.home_tuijian_lv);
+       TextView home_tuijian_tv = view.findViewById(R.id.home_tuijian_tv);
         initNetWork();
+        home_tuijian_lv.setVisibility(View.GONE);
     }
 
     private void initNetWork() {

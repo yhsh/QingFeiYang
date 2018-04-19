@@ -1,6 +1,9 @@
 初始化代码注释：<br />
 
-[Reading English version](https://github.com/yhsh/QingFeiYang/blob/master/English%20Version.md) 
+[Reading English version](https://github.com/yhsh/QingFeiYang/blob/master/English%20Version.md)
+
+更新时间：2018年4月19日09:09:12<br/>
+1.修复内涵段子关闭bug<br/>
 
 更新时间：2018年3月29日14:57:31<br/>
 1.新增关于我的页面可跳转我的博客<br/>
