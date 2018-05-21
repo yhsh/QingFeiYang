@@ -3,6 +3,10 @@ Initialization code annotation:
 
 [查看中文说明](https://github.com/yhsh/QingFeiYang/blob/master/README.md)
 
+Update time: 13:30:57 May 21, 2018
+1. new time to increase the update time of QQ Music Library
+
+
 Update time: 11:20:02 May 21, 2018
 1. repair the failure of all QQ music songs
 2. search songs add two playback sources
