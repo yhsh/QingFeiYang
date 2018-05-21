@@ -7,14 +7,18 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,9 +51,10 @@ public class SearchSongActivity extends BaseActivity {
     ArrayList<String> song_name = new ArrayList<>();//歌曲名字
     ArrayList<String> singer_name = new ArrayList<>();//歌手名字
     ArrayList<String> song_url_list = new ArrayList<>();//歌曲链接集合
+    ArrayList<String> list_songmid = new ArrayList<>();//歌曲的songmid
     int default_num = 10;
     int page = 1;
-    private Handler handler = new Handler() {
+    private Handler handler = new Handler(Looper.getMainLooper()) {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
@@ -61,6 +66,11 @@ public class SearchSongActivity extends BaseActivity {
                 if (page > 1) {
                     adapter.notifyDataSetChanged();
                 }
+            } else if (msg.what == 1) {
+                String search_song = (String) msg.obj;
+                String sub_str = search_song.substring(9, search_song.length() - 1);
+                Log.e("打印json数据", sub_str + "-----");
+                initJsonData(sub_str);
             }
         }
     };
@@ -68,6 +78,8 @@ public class SearchSongActivity extends BaseActivity {
     private QQListAdapter adapter;
     private boolean isSearch = false;
     private boolean isOpen;
+    private RadioButton play_source_rb_one;
+    private RadioButton play_source_rb_two;
 
     @Override
     protected View initView() {
@@ -79,6 +91,8 @@ public class SearchSongActivity extends BaseActivity {
         home_search_song_et = view.findViewById(R.id.home_search_song_et);
         home_search_song_bt = view.findViewById(R.id.home_search_song_bt);
         home_search_song_rl = view.findViewById(R.id.home_search_song_rl);
+        play_source_rb_one = findViewById(R.id.play_source_rb_one);
+        play_source_rb_two = findViewById(R.id.play_source_rb_two);
         home_search_song_bt.setOnClickListener(this);
         refreshAndLoadMoreData();//下拉刷新和下拉加载更多的方法
         longClickItemFunction();//长按歌曲下载
@@ -115,9 +129,9 @@ public class SearchSongActivity extends BaseActivity {
                 intent.putExtra("search_song_name", song_name);//歌曲名字
                 intent.putExtra("search_singer_name", singer_name);//歌手名字*/
 
-                intent.putExtra("sing_play_url", song_url_list.get(i-1));//歌曲播放链接
-                intent.putExtra("sing_name", song_name.get(i-1));//歌曲名字
-                intent.putExtra("singer_name", singer_name.get(i-1));//歌手名字
+                intent.putExtra("sing_play_url", song_url_list.get(i - 1));//歌曲播放链接
+                intent.putExtra("sing_name", song_name.get(i - 1));//歌曲名字
+                intent.putExtra("singer_name", singer_name.get(i - 1));//歌手名字
                 startActivity(intent);
             }
         });
@@ -179,7 +193,11 @@ public class SearchSongActivity extends BaseActivity {
             try {
                 String search_str = URLEncoder.encode(song_name, "utf-8");//将中文转码成16进制,播放点击的歌曲
 //            String search_str = URLEncoder.encode("老公天下第一", "utf-8");//将中文转码成16进制
-                GetNetworkJsonData.TakeNetworkData(YhshAPI.QQMUSIC_SING_SEARCH_BASE + page + YhshAPI.QQMUSIC_SING_SEARCH_END + search_str, handler, 0, pd, this, "UTF-8");
+                if (play_source_rb_one.isChecked()) {
+                    GetNetworkJsonData.TakeNetworkData(YhshAPI.QQMUSIC_SING_SEARCH_BASE + page + YhshAPI.QQMUSIC_SING_SEARCH_END + search_str, handler, 0, pd, this, "UTF-8");
+                } else if (play_source_rb_two.isChecked()) {
+                    GetNetworkJsonData.TakeNetworkData(YhshAPI.QQMUSIC_SING_SEARCH_BASE2 + search_str + YhshAPI.QQMUSIC_SING_SEARCH_END2, handler, 1, pd, this, "UTF-8");
+                }
 //                Log.e("打印搜索数据", YhshAPI.QQMUSIC_SING_SEARCH_BASE + "20" + YhshAPI.QQMUSIC_SING_SEARCH_END + search_str);
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
@@ -191,23 +209,24 @@ public class SearchSongActivity extends BaseActivity {
         //开始解析歌曲的f属性
         try {
             JSONObject jsonObject = new JSONObject(search_song);
-//            String song_f = jsonObject.getJSONObject("data").getJSONObject("song").getJSONArray("list").getJSONObject(0).getString("f");
-            JSONArray song_array = jsonObject.getJSONObject("data").getJSONObject("song").getJSONArray("list");
-            for (int i = 0; i < song_array.length(); i++) {
-                String song_f = song_array.getJSONObject(i).getString("f");
-                //将字符串切割，获取到倒数第六个属性进行拼接参数播放歌曲
-                String[] split = song_f.split("\\|");
-                String s = split[split.length - 5];//解析出来的f属性值来拼接播放歌曲
-                song_url = YhshAPI.QQMUSIC_SING_URL_BASE + "C100" + s + YhshAPI.QQMUSIC_SING_ERL_END;
-                song_url_list.add(song_url);
-            }
-            JSONArray jsonArray = jsonObject.getJSONObject("data").getJSONObject("song").getJSONArray("list");
-            for (int i = 0; i < jsonArray.length(); i++) {
-                song_name.add(jsonArray.getJSONObject(i).getString("fsong"));
-                singer_name.add(jsonArray.getJSONObject(i).getString("fsinger"));
-            }
-            //显示搜索的歌曲列表
-            showSongList(song_name, singer_name);
+            if (play_source_rb_one.isChecked()) {
+                //            String song_f = jsonObject.getJSONObject("data").getJSONObject("song").getJSONArray("list").getJSONObject(0).getString("f");
+                JSONArray song_array = jsonObject.getJSONObject("data").getJSONObject("song").getJSONArray("list");
+                for (int i = 0; i < song_array.length(); i++) {
+                    String song_f = song_array.getJSONObject(i).getString("f");
+                    //将字符串切割，获取到倒数第六个属性进行拼接参数播放歌曲
+                    String[] split = song_f.split("\\|");
+                    String s = split[split.length - 5];//解析出来的f属性值来拼接播放歌曲
+                    song_url = YhshAPI.QQMUSIC_SING_URL_BASE + "C100" + s + YhshAPI.QQMUSIC_SING_ERL_END;
+                    song_url_list.add(song_url);
+                }
+                JSONArray jsonArray = jsonObject.getJSONObject("data").getJSONObject("song").getJSONArray("list");
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    song_name.add(jsonArray.getJSONObject(i).getString("fsong"));
+                    singer_name.add(jsonArray.getJSONObject(i).getString("fsinger"));
+                }
+                //显示搜索的歌曲列表
+                showSongList(song_name, singer_name);
 //            Log.e("打印歌曲属性f", song_f);
             /*//将字符串切割，获取到倒数第六个属性进行拼接参数播放歌曲
             String[] split = song_f.split("\\|");
@@ -216,9 +235,23 @@ public class SearchSongActivity extends BaseActivity {
             song_url_list.add(song_url);*/
 //            Log.e("打印歌曲属性f", split[split.length - 5] + "===" + song_final_url);
 //            Log.e("QQ音乐最终播放地址", song_url_list.toString());
+            } else if (play_source_rb_two.isChecked()) {
+                JSONArray jsonArray = jsonObject.getJSONObject("data").getJSONObject("song").getJSONArray("list");
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    list_songmid.add(jsonArray.getJSONObject(i).getString("songmid"));
+                    song_name.add(jsonArray.getJSONObject(i).getString("songname"));
+                    singer_name.add(jsonArray.getJSONObject(i).getJSONArray("singer").getJSONObject(0).getString("name"));
+                    song_url_list.add(YhshAPI.QQMUSIC_SING_URL_BASE + "C100" + list_songmid.get(i) + YhshAPI.QQMUSIC_SING_ERL_END + "&guid=126548448");
+                }
+                //显示搜索的歌曲列表
+                showSongList(song_name, singer_name);
+            }
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
+
+
     }
 
     private void showSongList(final ArrayList<String> song_name, final ArrayList<String> singer_name) {

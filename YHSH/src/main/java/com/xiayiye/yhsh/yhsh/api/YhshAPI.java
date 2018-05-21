@@ -26,6 +26,8 @@ public interface YhshAPI {
     String QQMUSIC_SING_URL_BASE = "http://ws.stream.qqmusic.qq.com/";//QQ音乐播放链接基类
     String QQMUSIC_SING_SEARCH_BASE = "http://s.music.qq.com/fcgi-bin/music_search_new_platform?t=0&n=";//QQ音乐搜索歌曲基类
     String QQMUSIC_SING_SEARCH_END = "&aggr=1&cr=1&loginUin=0&format=json&inCharset=GB2312&outCharset=utf-8&notice=0&platform=jqminiframe.json&needNewCode=0&p=1&catZhida=0&remoteplace=sizer.newclient.next_song&w=";//QQ音乐搜索歌曲尾类后面加上搜歌歌曲歌名即可
+    String QQMUSIC_SING_SEARCH_BASE2 = "https://c.y.qq.com/soso/fcgi-bin/search_for_qq_cp?g_tk=5381&uin=0&format=jsonp&inCharset=utf-8&outCharset=utf-8&notice=0&platform=h5&needNewCode=1&w=";//后面加上要搜所的歌曲名字与下面的拼接
+    String QQMUSIC_SING_SEARCH_END2 = "&zhidaqu=1&catZhida=1&t=0&flag=1&ie=utf-8&sem=1&aggr=0&perpage=20&n=20&p=1&remoteplace=txt.mqq.all&_=1520833663464";//QQ音乐搜索歌曲尾类后面加上搜歌歌曲歌名即可
     String QQMUSIC_SING_ERL_END = ".m4a?fromtag=46";//QQ音乐播放链接后缀
     String NEIHAN_TUIJIAN = "http://lf.snssdk.com/neihan/stream/mix/v1/?content_type=-101";//内涵段子首页推荐
     String NEIHAN_VIDEO = "http://lf.snssdk.com/neihan/stream/mix/v1/?content_type=-104";//内涵段子首页视频
@@ -61,4 +63,5 @@ public interface YhshAPI {
     String KUGOU_MUSIC_MV_URL_QUALITY_MP4 = "&ismp3=1&ext=mp4";//酷狗MV的视频格式音质等,拼接此处表示MP4格式的MV
     String TRAIN_BASE = "http://apis.juhe.cn/train/s?name=";//查询火车车次的url基类
     String TRAIN_KEY = "&key=f008317fef660e600c4acbc811d3493b";//查询火车车次的key
+    String LATEST_QQ_MUSIC = "https://c.y.qq.com/v8/fcg-bin/fcg_v8_toplist_cp.fcg?g_tk=5381&uin=0&format=json&inCharset=utf-8&outCharset=utf-8&notice=0&platform=h5&needNewCode=1&tpl=3&page=detail&type=top&topid=27&_=1519963122923%27";//QQ音乐最新歌曲链接
 }

@@ -15,6 +15,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewStub;
 import android.view.Window;
@@ -157,6 +158,7 @@ public class PlayMusicNewActivity extends Activity implements View.OnClickListen
         pd = ProgressDialog.show(this, "获取数据", "请稍等，获取歌曲中…………", false, false);
         getSongF(pd, play_number);
 
+        Log.e("打印歌曲最终链接：", song_urls.get(0));
 
        /* song_lyrics = getResources().getStringArray(R.array.song_lyrics);
         song_names = getResources().getStringArray(R.array.song_names);

@@ -17,14 +17,33 @@
         android:padding="10dp" />
 
     <Button
-        android:minHeight="40dp"
-        android:layout_margin="10dp"
-        android:textSize="14sp"
         android:id="@+id/home_search_song_bt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
         android:background="@drawable/selector_player_playing_thumb"
-        android:text="搜索歌曲" />
+        android:minHeight="40dp"
+        android:text="搜索歌曲"
+        android:textSize="14sp" />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/play_source_rb_one"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="播放源1" />
+
+        <RadioButton
+            android:id="@+id/play_source_rb_two"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="播放源2" />
+    </RadioGroup>
 
     <com.xiayiye.yhsh.yhsh.view.RefreshListView
         android:id="@+id/home_search_song_rl"

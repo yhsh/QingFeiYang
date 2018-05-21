@@ -7,6 +7,7 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Environment;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 import android.view.View;
@@ -38,14 +39,12 @@ public class PlayMusicActivity extends BaseActivity {
     private String sing_play_url;//歌曲播放的地址
     private String sing_name;//歌曲名称
     private String singer_name;//歌手名字
-    private Handler handler = new Handler() {
+    private Handler handler = new Handler(Looper.getMainLooper()) {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             if (msg.what == 1) {
                 String search_song = (String) msg.obj;
-                //打印搜索到的json数据
-//                Log.e("打印搜索数据", search_song);
                 initJsonData(search_song);
             }
         }
@@ -65,13 +64,12 @@ public class PlayMusicActivity extends BaseActivity {
         singer_name = getIntent().getStringExtra("singer_name");
         ProgressDialog pd = ProgressDialog.show(this, "获取数据", "请稍等，获取歌曲中…………", false, false);
         try {
-            String search_str = URLEncoder.encode(sing_name, "utf-8");//将中文转码成16进制,播放点击的歌曲
-//            String search_str = URLEncoder.encode("老公天下第一", "utf-8");//将中文转码成16进制
+            //将中文转码成16进制,播放点击的歌曲
+            String search_str = URLEncoder.encode(sing_name, "utf-8");
             GetNetworkJsonData.TakeNetworkData(YhshAPI.QQMUSIC_SING_SEARCH_BASE + "10" + YhshAPI.QQMUSIC_SING_SEARCH_END + search_str, handler, 1, pd, this, "UTF-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-//        Log.e("打印歌曲：", sing_name + "歌手：" + singer_name);
         bt_player = view.findViewById(R.id.bt_player);
         Button bt_player_download = view.findViewById(R.id.bt_player_download);
         mediaPlayer = new MediaPlayer();
@@ -140,6 +138,7 @@ public class PlayMusicActivity extends BaseActivity {
 //                downSing(sing_play_url, singer_name, sing_name);
                 downSing(song_final_url, singer_name, sing_name);
                 break;
+            default:
         }
     }
 
@@ -255,8 +254,10 @@ public class PlayMusicActivity extends BaseActivity {
 //            Log.e("打印歌曲属性f", song_f);
             //将字符串切割，获取到倒数第六个属性进行拼接参数播放歌曲
             String[] split = song_f.split("\\|");
-            String s = split[split.length - 5];//解析出来的f属性值来拼接播放歌曲
-            song_final_url = YhshAPI.QQMUSIC_SING_URL_BASE + "C100" + s + YhshAPI.QQMUSIC_SING_ERL_END;
+            //解析f的属性
+            String s = split[split.length - 5];
+            //必须添加&guid=126548448这是最新版本的api2018年5月21日10:26:28
+            song_final_url = YhshAPI.QQMUSIC_SING_URL_BASE + "C100" + s + YhshAPI.QQMUSIC_SING_ERL_END + "&guid=126548448";
 //            Log.e("打印歌曲属性f", split[split.length - 5] + "===" + song_final_url);
             Log.e("QQ音乐最终播放地址", song_final_url);
         } catch (JSONException e) {

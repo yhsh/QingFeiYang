@@ -2,10 +2,7 @@ package com.xiayiye.yhsh.yhsh.fragment;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -36,17 +33,21 @@ public class MusicFragment extends BaseHomeFragment {
     protected void initData(View view) {
         FrameLayout home_music_ll_replace = view.findViewById(R.id.home_music_ll_replace);
         RadioGroup home_music_rg = view.findViewById(R.id.home_music_rg);
-        RadioButton home_music_rb_new = view.findViewById(R.id.home_music_rb_new);
+        RadioButton home_music_rb_qq_new = view.findViewById(R.id.home_music_rb_qq_new);
         RadioButton home_music_rb_kg = view.findViewById(R.id.home_music_rb_kg);
-//        RadioButton home_music_rb_hot = view.findViewById(R.id.home_music_rb_hot);
-        home_music_rb_new.setChecked(true);//默认最新歌曲
-        fragment = new NewMusicFragment();
+        //默认最新歌曲
+        home_music_rb_qq_new.setChecked(true);
+        fragment = new NewMusicQQFragment();
         getFragmentManager().beginTransaction().replace(R.id.home_music_ll_replace, fragment).commit();
         home_music_rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
                 switch (i) {
+                    case R.id.home_music_rb_qq_new:
+                        fragment = new NewMusicQQFragment();
+                        ft.replace(R.id.home_music_ll_replace, fragment).commit();
+                        break;
                     case R.id.home_music_rb_new:
                         fragment = new NewMusicFragment();
                         ft.replace(R.id.home_music_ll_replace, fragment).commit();
@@ -59,6 +60,7 @@ public class MusicFragment extends BaseHomeFragment {
                         fragment = new KgMusicFragment();
                         ft.replace(R.id.home_music_ll_replace, fragment).commit();
                         break;
+                    default:
                 }
             }
         });
