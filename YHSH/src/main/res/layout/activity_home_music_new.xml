@@ -4,6 +4,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+    <TextView
+        android:background="@color/colorAccents"
+        android:id="@+id/tv_update_time"
+        android:padding="5dp"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="QQ音乐库更新时间：\n2018年5月21日13:21:29" />
+
     <ListView
         android:id="@+id/home_new_music_lv"
         android:layout_width="match_parent"

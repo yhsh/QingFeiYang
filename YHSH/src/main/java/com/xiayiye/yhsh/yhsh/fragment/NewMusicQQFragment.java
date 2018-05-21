@@ -1,5 +1,5 @@
 package com.xiayiye.yhsh.yhsh.fragment;
-/**
+/*
  * Copyright (c) 2018, smuyyh@gmail.com All Rights Reserved.
  * #                                                   #
  * #                       _oo0oo_                     #
@@ -65,7 +65,6 @@ public class NewMusicQQFragment extends BaseHomeFragment {
     ArrayList<String> sing_name = new ArrayList<>();//歌曲名称
     ArrayList<String> sing_url = new ArrayList<>();//歌曲url集合
     ArrayList<String> singer_name = new ArrayList<>();//歌手名字
-    ArrayList<String> sing_large = new ArrayList<>();//歌曲大小
     ArrayList<String> singer_id = new ArrayList<>();//歌曲id
     Handler handler = new Handler(Looper.getMainLooper()) {
         @Override
@@ -81,11 +80,13 @@ public class NewMusicQQFragment extends BaseHomeFragment {
     };
     private ProgressDialog pd;
     private ListView home_new_music_lv;
+    private TextView tv_update_time;
 
     private void initNewMusicJson(String new_music_json) {
         //拿到最新歌曲的json数据
         try {
             JSONObject json_music = new JSONObject(new_music_json);
+            tv_update_time.setText("QQ音乐库更新时间:\n" + json_music.getString("update_time"));
             JSONArray songlist = json_music.getJSONArray("songlist");
             for (int i = 0; i < songlist.length(); i++) {
                 sing_name.add(songlist.getJSONObject(i).getJSONObject("data").getString("songname"));
@@ -108,6 +109,7 @@ public class NewMusicQQFragment extends BaseHomeFragment {
         pd = ProgressDialog.show(getActivity(), "获取数据", "请稍等，获取最新歌曲中…………", false, false);
         GetNetworkJsonData.TakeNetworkData(YhshAPI.LATEST_QQ_MUSIC, handler, 0, pd, getActivity(), "UTF-8");
         home_new_music_lv = view.findViewById(R.id.home_new_music_lv);
+        tv_update_time = view.findViewById(R.id.tv_update_time);
     }
 
     @Override
