@@ -26,7 +26,7 @@ public class AboutYHSHActivity extends Activity implements View.OnClickListener 
         view_gone = findViewById(R.id.view_gone);
         wv_my_blog = findViewById(R.id.wv_my_blog);
         about.setOnClickListener(this);
-        look_my_blog.setOnClickListener(this);
+        open_my_blog.setOnClickListener(this);
         look_my_blog.setOnClickListener(this);
 
         WebSettings settings = wv_my_blog.getSettings();
