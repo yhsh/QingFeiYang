@@ -1,10 +1,15 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'yhsh'
+            keyPassword '123456'
+            storeFile file('G:/Android/AndroidStudioProjects/QingFeiYang/yhsh.jks')
+            storePassword '123456'
+        }
+    }
     compileSdkVersion 26
-
-
-
     defaultConfig {
         applicationId "com.xiayiye.yhsh.yhsh"
         minSdkVersion 15
@@ -20,18 +25,20 @@ android {
                     }
         }
     }
-
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            debuggable true
+            signingConfig signingConfigs.config
+            proguardFile 'G:/Android/AndroidStudioProjects/QingFeiYang/YHSH/proguard-rules.pro'
+            zipAlignEnabled true
         }
         debug {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
 }
 
 dependencies {
